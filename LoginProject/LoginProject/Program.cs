@@ -29,6 +29,14 @@ builder.Services.AddRazorPages(options => {
     options.Conventions.AuthorizeFolder("/Admin", "admin");
 });
 
+// dotnet user-secrets set "Authentication__Google__ClientId" "" --project LoginProject
+// dotnet user-secrets set "Authentication__Google__ClientSecret" "" --project LoginProject
+
+builder.Services.AddAuthentication().AddGoogle(options => {
+    options.ClientId = builder.Configuration["Authentication__Google__ClientId"];
+    options.ClientSecret = builder.Configuration["Authentication__Google__ClientSecret"];
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
