@@ -20,7 +20,14 @@ builder.Services.AddDefaultIdentity<User>(options => {
 })
     .AddRoles<IdentityRole<Guid>>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
-builder.Services.AddRazorPages();
+
+builder.Services.AddAuthorization(options => {
+    options.AddPolicy("admin", policy => policy.RequireRole("admin"));
+});
+
+builder.Services.AddRazorPages(options => {
+    options.Conventions.AuthorizeFolder("/Admin", "admin");
+});
 
 var app = builder.Build();
 
