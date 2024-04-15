@@ -17,6 +17,36 @@ namespace LoginProject.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.4");
 
+            modelBuilder.Entity("LoginProject.Models.Post", b =>
+                {
+                    b.Property<Guid>("PostId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("AuthorId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT")
+                        .HasDefaultValue(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
+
+                    b.Property<Guid?>("ParentPostId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("PostId");
+
+                    b.HasIndex("AuthorId");
+
+                    b.HasIndex("ParentPostId");
+
+                    b.ToTable("Posts", (string)null);
+                });
+
             modelBuilder.Entity("LoginProject.Models.User", b =>
                 {
                     b.Property<Guid>("Id")
@@ -89,14 +119,14 @@ namespace LoginProject.Migrations
                         {
                             Id = new Guid("11111111-1111-1111-1111-111111111111"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0cc7ff0e-dc24-4732-9692-edbd783be8b0",
+                            ConcurrencyStamp = "13eb2a59-925b-4e57-a856-9bc78ed0ce00",
                             Email = "admin@local.slhn.cz",
                             EmailConfirmed = true,
                             FullName = "Administrator User",
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCAL.SLHN.CZ",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEDRNsSxCBnsquPYFiTWY/GzCg3AS9YQmGNu3ZTv2LPvHVdY64H+RbqMHunTA3G31eg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPJata0VDSRc0Sjio1rSc2n/RV5VWzZTotUyx6AWVKKiGvMv8SegwWmf6WJIXxkEcw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "Asdfiasjfisda",
                             TwoFactorEnabled = false,
@@ -249,6 +279,24 @@ namespace LoginProject.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("LoginProject.Models.Post", b =>
+                {
+                    b.HasOne("LoginProject.Models.User", "Author")
+                        .WithMany("Posts")
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("LoginProject.Models.Post", "ParentPost")
+                        .WithMany()
+                        .HasForeignKey("ParentPostId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Author");
+
+                    b.Navigation("ParentPost");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", null)
@@ -298,6 +346,11 @@ namespace LoginProject.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("LoginProject.Models.User", b =>
+                {
+                    b.Navigation("Posts");
                 });
 #pragma warning restore 612, 618
         }

@@ -6,12 +6,18 @@ using Microsoft.EntityFrameworkCore;
 namespace LoginProject.Data;
 
 public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : IdentityDbContext<User, IdentityRole<Guid>, Guid>(options) {
-    public override DbSet<User> Users { get; set; }
+    public override DbSet<User> Users { get; set; } = default!;
+    public DbSet<Post> Posts { get; set; } = default!;
     protected override void OnModelCreating(ModelBuilder builder) {
         base.OnModelCreating(builder);
 
         builder.Entity<User>().ToTable("Users");
         builder.Entity<User>().Property(u => u.Id).ValueGeneratedOnAdd();
+        builder.Entity<Post>().ToTable("Posts");
+        builder.Entity<Post>().Property(g => g.CreatedAt).HasDefaultValue(DateTime.MinValue);
+
+        builder.Entity<Post>().HasOne(p => p.Author).WithMany(u => u.Posts).HasForeignKey(p => p.AuthorId).OnDelete(DeleteBehavior.Cascade);
+        builder.Entity<Post>().HasOne(p => p.ParentPost).WithMany().HasForeignKey(p => p.ParentPostId).OnDelete(DeleteBehavior.Restrict);
 
         Guid adminId = new("11111111-1111-1111-1111-111111111111");
 
