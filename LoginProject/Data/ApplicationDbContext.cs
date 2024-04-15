@@ -26,8 +26,8 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
             entity.HasData(new User {
                 Id = adminId,
                 FullName = "Administrator User",
-                UserName = "admin@local.slhn.cz",
-                NormalizedUserName = "ADMIN@LOCAL.SLHN.CZ",
+                UserName = "admin",
+                NormalizedUserName = "ADMIN",
                 Email = "admin@local.slhn.cz",
                 NormalizedEmail = "ADMIN@LOCAL.SLHN.CZ",
                 EmailConfirmed = true,
