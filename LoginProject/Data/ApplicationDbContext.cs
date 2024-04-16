@@ -17,7 +17,7 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
         builder.Entity<Post>().Property(g => g.CreatedAt).HasDefaultValue(DateTime.MinValue);
 
         builder.Entity<Post>().HasOne(p => p.Author).WithMany(u => u.Posts).HasForeignKey(p => p.AuthorId).OnDelete(DeleteBehavior.Cascade);
-        builder.Entity<Post>().HasOne(p => p.ParentPost).WithMany().HasForeignKey(p => p.ParentPostId).OnDelete(DeleteBehavior.Restrict);
+        builder.Entity<Post>().HasOne(p => p.ParentPost).WithMany().HasForeignKey(p => p.ParentPostId).OnDelete(DeleteBehavior.Cascade);
 
         Guid adminId = new("11111111-1111-1111-1111-111111111111");
 
