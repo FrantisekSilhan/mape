@@ -26,7 +26,7 @@ builder.Services.AddAuthorization(options => {
 });
 
 builder.Services.AddRazorPages(options => {
-    options.Conventions.AuthorizeFolder("/Admin", "admin");
+    options.Conventions.AuthorizeAreaFolder("Admin", "/", "admin");
     options.Conventions.AuthorizeFolder("/Posts");
     options.Conventions.AuthorizePage("/Post");
 });
@@ -57,6 +57,16 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.MapControllerRoute(
+    name: "Admin",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+);
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}"
+);
 
 app.MapRazorPages();
 

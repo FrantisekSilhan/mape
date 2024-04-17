@@ -8,18 +8,18 @@ using Microsoft.EntityFrameworkCore;
 using LoginProject.Data;
 using LoginProject.Models;
 
-namespace LoginProject.Pages.Admin
+namespace LoginProject.Areas.Admin.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly LoginProject.Data.ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public IndexModel(LoginProject.Data.ApplicationDbContext context)
+        public IndexModel(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        public IList<User> User { get;set; } = default!;
+        public IList<User> User { get; set; } = default!;
 
         public async Task OnGetAsync()
         {

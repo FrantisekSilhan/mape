@@ -8,13 +8,13 @@ using Microsoft.EntityFrameworkCore;
 using LoginProject.Data;
 using LoginProject.Models;
 
-namespace LoginProject.Pages.Admin
+namespace LoginProject.Areas.Admin.Pages
 {
     public class DeleteModel : PageModel
     {
-        private readonly LoginProject.Data.ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public DeleteModel(LoginProject.Data.ApplicationDbContext context)
+        public DeleteModel(ApplicationDbContext context)
         {
             _context = context;
         }

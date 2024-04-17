@@ -8,13 +8,13 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using LoginProject.Data;
 using LoginProject.Models;
 
-namespace LoginProject.Pages.Admin
+namespace LoginProject.Areas.Admin.Pages
 {
     public class CreateModel : PageModel
     {
-        private readonly LoginProject.Data.ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public CreateModel(LoginProject.Data.ApplicationDbContext context)
+        public CreateModel(ApplicationDbContext context)
         {
             _context = context;
         }

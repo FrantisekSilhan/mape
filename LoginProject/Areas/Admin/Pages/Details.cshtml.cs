@@ -8,13 +8,13 @@ using Microsoft.EntityFrameworkCore;
 using LoginProject.Data;
 using LoginProject.Models;
 
-namespace LoginProject.Pages.Admin
+namespace LoginProject.Areas.Admin.Pages
 {
     public class DetailsModel : PageModel
     {
-        private readonly LoginProject.Data.ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public DetailsModel(LoginProject.Data.ApplicationDbContext context)
+        public DetailsModel(ApplicationDbContext context)
         {
             _context = context;
         }

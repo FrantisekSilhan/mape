@@ -9,13 +9,13 @@ using Microsoft.EntityFrameworkCore;
 using LoginProject.Data;
 using LoginProject.Models;
 
-namespace LoginProject.Pages.Admin
+namespace LoginProject.Areas.Admin.Pages
 {
     public class EditModel : PageModel
     {
-        private readonly LoginProject.Data.ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public EditModel(LoginProject.Data.ApplicationDbContext context)
+        public EditModel(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -30,7 +30,7 @@ namespace LoginProject.Pages.Admin
                 return NotFound();
             }
 
-            var user =  await _context.Users.FirstOrDefaultAsync(m => m.Id == id);
+            var user = await _context.Users.FirstOrDefaultAsync(m => m.Id == id);
             if (user == null)
             {
                 return NotFound();
