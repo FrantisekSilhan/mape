@@ -8,7 +8,7 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-page="Create">Create New</a>
+    <a asp-page="./Create">Create New</a>
 </p>
 <table class="table">
     <thead>
@@ -24,6 +24,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Post[0].ParentPost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Post[0].RootPost)
             </th>
             <th></th>
         </tr>
@@ -42,6 +45,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ParentPost.PostId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RootPost.PostId)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.PostId">Edit</a> |

@@ -1,0 +1,14 @@
+﻿@page "/User/{username}"
+@model LoginProject.Pages.Users.UserModel
+@{
+}
+
+<h1>@Model.UserProfile.UserName</h1>
+
+@foreach (var post in Model.Posts)
+{
+    <div>
+        <h4>@post.Content</h4>
+        <p>@post.CreatedAt</p>
+    </div>
+}

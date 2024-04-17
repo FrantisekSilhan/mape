@@ -20,6 +20,7 @@ namespace LoginProject.Pages.Posts
         }
 
         public Post Post { get; set; } = default!;
+        public Guid? RootPostId { get; set; }
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
@@ -36,6 +37,11 @@ namespace LoginProject.Pages.Posts
             else
             {
                 Post = post;
+                if (Post.RootPostId != null) {
+                    RootPostId = Post.RootPostId;
+                } else {
+                    RootPostId = Post.PostId;
+                }
             }
             return Page();
         }

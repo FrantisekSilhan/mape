@@ -29,7 +29,7 @@ namespace LoginProject.Pages.Posts {
         public PostIM Post { get; set; } = default!;
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
-        public async Task<IActionResult> OnPostAsync(Guid? parentPostId) {
+        public async Task<IActionResult> OnPostAsync(Guid? parentPostId, Guid? rootPostId) {
             if (!ModelState.IsValid) {
                 return Page();
             }
@@ -43,7 +43,8 @@ namespace LoginProject.Pages.Posts {
                 Author = (await _users.GetUserAsync(User))!,
                 Content = Post.Content,
                 CreatedAt = DateTime.UtcNow,
-                ParentPostId = parentPostId
+                ParentPostId = parentPostId,
+                RootPostId = rootPostId,
             };
 
             await _context.Posts.AddAsync(post);

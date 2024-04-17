@@ -13,5 +13,9 @@ namespace LoginProject.Models {
         public Guid? ParentPostId { get; set; } = default!;
         [ForeignKey(nameof(ParentPostId))]
         public Post? ParentPost { get; set; } = default!;
+
+        public Guid? RootPostId { get; set; } = default!;
+        [ForeignKey(nameof(RootPostId))]
+        public Post? RootPost { get; set; } = default!;
     }
 }
