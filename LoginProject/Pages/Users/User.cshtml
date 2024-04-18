@@ -3,12 +3,14 @@
 @{
 }
 
-<h1>@Model.UserProfile.UserName</h1>
+<h1>@Model.UserProfile!.UserName</h1>
 
 @foreach (var post in Model.Posts)
 {
     <div>
-        <h4>@post.Content</h4>
+        <div>@Html.Raw(post.Content)</div>
         <p>@post.CreatedAt</p>
+        <a asp-page="/Posts/Reply" asp-route-id="@post.PostId">Reply</a>
+        <a asp-page="/Posts/View" asp-route-id="@post.PostId">View</a>
     </div>
 }
