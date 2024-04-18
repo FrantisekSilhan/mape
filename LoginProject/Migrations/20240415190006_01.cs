@@ -1,34 +1,27 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace LoginProject.Migrations
-{
+namespace LoginProject.Migrations {
     /// <inheritdoc />
-    public partial class _01 : Migration
-    {
+    public partial class _01 : Migration {
         /// <inheritdoc />
-        protected override void Up(MigrationBuilder migrationBuilder)
-        {
+        protected override void Up(MigrationBuilder migrationBuilder) {
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
-                columns: table => new
-                {
+                columns: table => new {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     Name = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
                     NormalizedName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
                     ConcurrencyStamp = table.Column<string>(type: "TEXT", nullable: true)
                 },
-                constraints: table =>
-                {
+                constraints: table => {
                     table.PrimaryKey("PK_AspNetRoles", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Users",
-                columns: table => new
-                {
+                columns: table => new {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     FullName = table.Column<string>(type: "TEXT", nullable: true),
                     UserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
@@ -46,23 +39,20 @@ namespace LoginProject.Migrations
                     LockoutEnabled = table.Column<bool>(type: "INTEGER", nullable: false),
                     AccessFailedCount = table.Column<int>(type: "INTEGER", nullable: false)
                 },
-                constraints: table =>
-                {
+                constraints: table => {
                     table.PrimaryKey("PK_Users", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
-                columns: table => new
-                {
+                columns: table => new {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     RoleId = table.Column<Guid>(type: "TEXT", nullable: false),
                     ClaimType = table.Column<string>(type: "TEXT", nullable: true),
                     ClaimValue = table.Column<string>(type: "TEXT", nullable: true)
                 },
-                constraints: table =>
-                {
+                constraints: table => {
                     table.PrimaryKey("PK_AspNetRoleClaims", x => x.Id);
                     table.ForeignKey(
                         name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
@@ -74,16 +64,14 @@ namespace LoginProject.Migrations
 
             migrationBuilder.CreateTable(
                 name: "AspNetUserClaims",
-                columns: table => new
-                {
+                columns: table => new {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     UserId = table.Column<Guid>(type: "TEXT", nullable: false),
                     ClaimType = table.Column<string>(type: "TEXT", nullable: true),
                     ClaimValue = table.Column<string>(type: "TEXT", nullable: true)
                 },
-                constraints: table =>
-                {
+                constraints: table => {
                     table.PrimaryKey("PK_AspNetUserClaims", x => x.Id);
                     table.ForeignKey(
                         name: "FK_AspNetUserClaims_Users_UserId",
@@ -95,15 +83,13 @@ namespace LoginProject.Migrations
 
             migrationBuilder.CreateTable(
                 name: "AspNetUserLogins",
-                columns: table => new
-                {
+                columns: table => new {
                     LoginProvider = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false),
                     ProviderKey = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false),
                     ProviderDisplayName = table.Column<string>(type: "TEXT", nullable: true),
                     UserId = table.Column<Guid>(type: "TEXT", nullable: false)
                 },
-                constraints: table =>
-                {
+                constraints: table => {
                     table.PrimaryKey("PK_AspNetUserLogins", x => new { x.LoginProvider, x.ProviderKey });
                     table.ForeignKey(
                         name: "FK_AspNetUserLogins_Users_UserId",
@@ -115,13 +101,11 @@ namespace LoginProject.Migrations
 
             migrationBuilder.CreateTable(
                 name: "AspNetUserRoles",
-                columns: table => new
-                {
+                columns: table => new {
                     UserId = table.Column<Guid>(type: "TEXT", nullable: false),
                     RoleId = table.Column<Guid>(type: "TEXT", nullable: false)
                 },
-                constraints: table =>
-                {
+                constraints: table => {
                     table.PrimaryKey("PK_AspNetUserRoles", x => new { x.UserId, x.RoleId });
                     table.ForeignKey(
                         name: "FK_AspNetUserRoles_AspNetRoles_RoleId",
@@ -139,15 +123,13 @@ namespace LoginProject.Migrations
 
             migrationBuilder.CreateTable(
                 name: "AspNetUserTokens",
-                columns: table => new
-                {
+                columns: table => new {
                     UserId = table.Column<Guid>(type: "TEXT", nullable: false),
                     LoginProvider = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false),
                     Name = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false),
                     Value = table.Column<string>(type: "TEXT", nullable: true)
                 },
-                constraints: table =>
-                {
+                constraints: table => {
                     table.PrimaryKey("PK_AspNetUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
                     table.ForeignKey(
                         name: "FK_AspNetUserTokens_Users_UserId",
@@ -159,16 +141,14 @@ namespace LoginProject.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Posts",
-                columns: table => new
-                {
+                columns: table => new {
                     PostId = table.Column<Guid>(type: "TEXT", nullable: false),
                     Content = table.Column<string>(type: "TEXT", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false, defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)),
                     AuthorId = table.Column<Guid>(type: "TEXT", nullable: false),
                     ParentPostId = table.Column<Guid>(type: "TEXT", nullable: true)
                 },
-                constraints: table =>
-                {
+                constraints: table => {
                     table.PrimaryKey("PK_Posts", x => x.PostId);
                     table.ForeignKey(
                         name: "FK_Posts_Posts_ParentPostId",
@@ -248,8 +228,7 @@ namespace LoginProject.Migrations
         }
 
         /// <inheritdoc />
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
+        protected override void Down(MigrationBuilder migrationBuilder) {
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 

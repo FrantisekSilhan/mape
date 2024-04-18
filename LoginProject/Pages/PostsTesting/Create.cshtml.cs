@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using LoginProject.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using LoginProject.Data;
-using LoginProject.Models;
-using Microsoft.AspNetCore.Identity;
 
-namespace LoginProject.Pages.Posts {
+namespace LoginProject.Pages.PostsTesting {
     public class CreateModel : PageModel {
         private readonly LoginProject.Data.ApplicationDbContext _context;
         private readonly UserManager<User> _users;

@@ -1,16 +1,12 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace LoginProject.Migrations
-{
+namespace LoginProject.Migrations {
     /// <inheritdoc />
-    public partial class _03 : Migration
-    {
+    public partial class _03 : Migration {
         /// <inheritdoc />
-        protected override void Up(MigrationBuilder migrationBuilder)
-        {
+        protected override void Up(MigrationBuilder migrationBuilder) {
             migrationBuilder.AddColumn<Guid>(
                 name: "RootPostId",
                 table: "Posts",
@@ -39,8 +35,7 @@ namespace LoginProject.Migrations
         }
 
         /// <inheritdoc />
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
+        protected override void Down(MigrationBuilder migrationBuilder) {
             migrationBuilder.DropForeignKey(
                 name: "FK_Posts_Posts_RootPostId",
                 table: "Posts");

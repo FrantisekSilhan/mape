@@ -4,10 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
-namespace LoginProject.Pages.Users
-{
-    public class UserModel : PageModel
-    {
+namespace LoginProject.Pages.Users {
+    public class UserModel : PageModel {
         private readonly LoginProject.Data.ApplicationDbContext _context;
         private readonly UserManager<User> _users;
 
@@ -19,8 +17,7 @@ namespace LoginProject.Pages.Users
         public User? UserProfile { get; set; } = default!;
         public List<Post> Posts { get; set; } = default!;
 
-        public async Task<IActionResult> OnGet(string username)
-        {
+        public async Task<IActionResult> OnGet(string username) {
             UserProfile = await _users.FindByNameAsync(username);
 
             if (UserProfile == null) {

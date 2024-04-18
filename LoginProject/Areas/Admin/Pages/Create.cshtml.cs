@@ -1,26 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using LoginProject.Data;
+using LoginProject.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using LoginProject.Data;
-using LoginProject.Models;
 
-namespace LoginProject.Areas.Admin.Pages
-{
-    public class CreateModel : PageModel
-    {
+namespace LoginProject.Areas.Admin.Pages {
+    public class CreateModel : PageModel {
         private readonly ApplicationDbContext _context;
 
-        public CreateModel(ApplicationDbContext context)
-        {
+        public CreateModel(ApplicationDbContext context) {
             _context = context;
         }
 
-        public IActionResult OnGet()
-        {
+        public IActionResult OnGet() {
             return Page();
         }
 
@@ -28,10 +19,8 @@ namespace LoginProject.Areas.Admin.Pages
         public User User { get; set; } = default!;
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
-        public async Task<IActionResult> OnPostAsync()
-        {
-            if (!ModelState.IsValid)
-            {
+        public async Task<IActionResult> OnPostAsync() {
+            if (!ModelState.IsValid) {
                 return Page();
             }
 
