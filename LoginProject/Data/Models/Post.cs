@@ -17,5 +17,8 @@ namespace LoginProject.Models {
         public Guid? RootPostId { get; set; } = default!;
         [ForeignKey(nameof(RootPostId))]
         public Post? RootPost { get; set; } = default!;
+
+        [NotMapped]
+        public int RepliesCount { get; set; } = default!;
     }
 }

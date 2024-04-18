@@ -1,0 +1,24 @@
+﻿@page "/Post/{id}/Reply"
+@model LoginProject.Pages.Posts.ReplyModel
+@{
+}
+
+<p>Replying to</p>
+<div>
+    <p>@Model.Post.Author.UserName</p>
+    <p>@Model.Post.CreatedAt</p>
+    <div>@Html.Raw(Model.Post.Content)</div>
+    <p>@Model.Post.RepliesCount replies</p>
+</div>
+
+<div>
+    <form method="post">
+        <div asp-validation-summary="ModelOnly"></div>
+        <div>
+            <label asp-for="Input.Content"></label>
+            <textarea asp-for="Input.Content"></textarea>
+            <span asp-validation-for="Input.Content"></span>
+        </div>
+        <button type="submit">Reply</button>
+    </form>
+</div>
