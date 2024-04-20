@@ -1,10 +1,21 @@
-﻿@page "/User/{username}"
+﻿@page
 @using LoginProject.Utils
-@model LoginProject.Pages.Users.UserModel
+@model LoginProject.Pages.Posts.IndexModel
 @{
 }
 
-<h1 class="title">@Model.UserProfile!.UserName's posts</h1>
+<div>
+    <form class="post-form" method="post">
+        <div asp-validation-summary="ModelOnly"></div>
+        <div class="post-form__content-wrapper">
+            <textarea placeholder="What is happening?!" class="post-form__content" asp-for="Input.Content"></textarea>
+            <span class="post-form__content-message" asp-validation-for="Input.Content"></span>
+        </div>
+        <div class="post-form__btn-wrapper">
+            <button class="post-form__btn" type="submit">Post</button>
+        </div>
+    </form>
+</div>
 
 <div class="posts">
 @foreach (var post in Model.Posts)

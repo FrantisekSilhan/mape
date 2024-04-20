@@ -1,0 +1,125 @@
+﻿.posts,
+.posts__main,
+.posts__replies {
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
+}
+
+.posts__replies {
+    max-width: 500px;
+    margin-left: .75em;
+}
+
+.post {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    background-color: hsl(var(--post-bg));
+    border: 1px solid hsl(var(--post-stroke));
+    border-radius: 1em;
+    padding: 1em;
+    position: relative;
+    transition: background ease-in-out .05s;
+    cursor: pointer;
+}
+
+.post[data-id]:hover {
+    background-color: hsl(var(--post-hover));
+}
+
+.post.post--main {
+    cursor: default;
+}
+
+.post__username {
+    font-weight: bold;
+}
+
+.post__username:hover {
+    text-decoration: underline;
+}
+
+.post__time {
+    font-size: 0.8em;
+    color: hsl(var(--text-dimmed));
+}
+
+.post__top {
+    display: flex;
+    gap: 1em;
+    align-items: center;
+}
+
+.post--main {
+    border: 1px solid hsl(var(--text-dimmed));
+}
+
+.post--main .post__action {
+    width: 100%;
+    border-top: 1px solid hsl(var(--post-stroke));
+    border-bottom: 1px solid hsl(var(--post-stroke));
+    padding: .5em 0;
+}
+
+.post__line {
+    border-left: 1px solid hsl(var(--text-dimmed));
+    position: absolute;
+    top: 1em;
+    bottom: 1em;
+    left: .5em;
+}
+
+.post__content {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.post-form {
+    display: flex;
+    flex-direction: column;
+    background-color: hsl(var(--post-bg));
+    border: 1px solid hsl(var(--post-stroke));
+    border-radius: 1em;
+    padding: 1em;
+    position: relative;
+    margin: 1em 0;
+}
+
+.post-form__content {
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    resize: none;
+    color: hsl(var(--text));
+    line-height: 1.25;
+    height: calc(1.25em * 3);
+    font-size: 1rem;
+}
+
+.post-form__content-message {
+    font-size: 0.8rem;
+    color: hsl(var(--text-dimmed));
+}
+
+.post-form__btn-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    gap: .5em;
+}
+
+.post-form__btn {
+    flex-direction: column;
+    color: hsl(var(--text));
+    background-color: hsl(var(--post-bg));
+    border: 1px solid hsl(var(--post-stroke));
+    border-radius: 1em;
+    padding: .5em 2em;
+    cursor: pointer;
+}
+
+.post-form__btn:hover {
+    background-color: hsl(var(--post-hover));
+}

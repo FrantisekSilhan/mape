@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace LoginProject.Pages {
@@ -8,8 +9,8 @@ namespace LoginProject.Pages {
             _logger = logger;
         }
 
-        public void OnGet() {
-
+        public IActionResult OnGet() {
+            return RedirectToPage("/Posts/Index");
         }
     }
 }

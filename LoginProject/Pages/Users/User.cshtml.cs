@@ -24,10 +24,23 @@ namespace LoginProject.Pages.Users {
                 return NotFound();
             }
 
-            Posts = await _context.Posts.Where(p => p.AuthorId == UserProfile.Id).ToListAsync();
+            Posts = await _context.Posts.Where(p => p.AuthorId == UserProfile.Id).OrderByDescending(p => p.CreatedAt).ToListAsync();
 
+            var groupedRepliesCount = await _context.Posts
+                .Where(p => Posts.Select(p => p.PostId).ToList().Contains((Guid)p.ParentPostId!))
+                .GroupBy(p => p.ParentPostId)
+                .Select(g => new PostCount { PostId = g.Key, Count = g.Count() })
+                .ToListAsync();
+
+            Posts.ForEach(p => {
+                p.RepliesCount = groupedRepliesCount.FirstOrDefault(rc => rc.PostId == p.PostId)?.Count ?? 0;
+            });
 
             return Page();
+        }
+        private class PostCount {
+            public Guid? PostId { get; set; }
+            public int Count { get; set; }
         }
     }
 }

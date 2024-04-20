@@ -1,0 +1,50 @@
+﻿.icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    display: inline-block;
+    background-size: contain;
+}
+
+.icon--comment {
+    background-image: url("/img/comment.svg");
+}
+
+.icon-wrapper:hover .icon--comment {
+    background-image: url("/img/comment-hover.svg");
+}
+
+.icon--leftarrow {
+    background-image: url("/img/leftarrow.svg");
+}
+
+.icon-wrapper:hover .icon--leftarrow {
+    background-image: url("/img/leftarrow-hover.svg");
+}
+
+.icon--delete {
+    background-image: url("/img/delete.svg");
+}
+
+.icon-wrapper:hover .icon--delete {
+    background-image: url("/img/delete-hover.svg");
+}
+
+.icon-wrapper {
+    font-size: 0.75rem;
+    color: hsl(var(--text-dimmed));
+    display: flex;
+    align-items: center;
+    width: max-content;
+    text-decoration: none;
+    background-color: transparent;
+    border: none;
+}
+
+.icon-wrapper--s2 {
+    font-size: 1.5rem;
+}
+
+.icon-wrapper:hover {
+    color: hsl(var(--text));
+    cursor: pointer;
+}

@@ -29,6 +29,7 @@ builder.Services.AddRazorPages(options => {
     options.Conventions.AuthorizeAreaFolder("Admin", "/", "admin");
     options.Conventions.AuthorizeFolder("/Posts");
     options.Conventions.AuthorizePage("/Post");
+    options.Conventions.AuthorizePage("/Posts/Delete", "admin");
 });
 
 // dotnet user-secrets set "Authentication__Google__ClientId" "" --project LoginProject

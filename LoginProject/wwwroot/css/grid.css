@@ -1,0 +1,5 @@
+﻿.page-grid {
+    display: grid;
+    grid-template-columns: 1fr 512px 1fr;
+    position: relative;
+}
