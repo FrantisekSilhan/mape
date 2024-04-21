@@ -1,0 +1,25 @@
+﻿form input {
+    border: 1px solid hsl(var(--post-stroke));
+    outline: none;
+    background-color: hsl(var(--post-bg));
+    padding: .5em 1em;
+    margin-bottom: .5em;
+    color: inherit;
+    border-radius: .5em;
+}
+
+form input[type=checkbox]:focus-visible {
+    outline: 2px solid hsl(var(--text-dimmed));
+}
+
+form input:focus-visible {
+    border: 1px solid hsl(var(--text-dimmed));
+}
+
+form a {
+    color: hsl(var(--text));
+}
+
+form a:hover {
+    color: hsl(var(--text-dimmed));
+}

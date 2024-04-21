@@ -14,6 +14,19 @@
             <button type="submit" class="navbar__link navbar__btn">Logout</button>
         </form>
     </li>
+    @if (User.IsInRole("admin")) {
+        <li class="navbar__item">
+            <p class="title">Admin</p>
+            <ul class="navbar__items">
+                <li class="navbar__item">
+                    <a class="navbar__link" asp-area="Admin" asp-page="/Index">Users</a>
+                </li>
+                <li class="navbar__item">
+                    <a class="navbar__link" asp-area="Admin" asp-page="/Posts/Index">Posts</a>
+                </li>
+            </ul>
+        </li>
+    }
 }
 else
 {

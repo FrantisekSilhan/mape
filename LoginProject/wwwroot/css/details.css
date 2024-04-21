@@ -5,3 +5,35 @@
 .flex--spacebetween {
     justify-content: space-between;
 }
+
+.btn {
+    color: hsl(var(--text));
+    padding: .5em 2em;
+    border-radius: 1em;
+    text-decoration: none;
+    font-size: 1rem;
+    background-color: hsl(var(--post-bg));
+    display: inline-block;
+    border: 1px solid hsl(var(--post-stroke));
+    transition: background-color ease-in-out .05s;
+    width: max-content;
+    cursor: pointer;
+    margin-bottom: .5em;
+}
+
+.btn:hover {
+    background-color: hsl(var(--post-hover));
+}
+
+.text--error {
+    font-size: 0.8rem;
+    color: hsl(var(--text-dimmed));
+}
+
+span.text--error {
+    display: block;
+}
+
+hr {
+    margin: .5em 0;
+}

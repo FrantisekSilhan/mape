@@ -50,21 +50,24 @@ namespace LoginProject.Areas.Admin.Pages {
                 return Page();
             }
 
-            User user = new User {
-                Id = Input.Id,
-                FullName = Input.FullName,
-                UserName = Input.UserName,
-                Email = Input.Email,
-                EmailConfirmed = Input.EmailConfirmed,
-                PhoneNumber = Input.PhoneNumber,
-                PhoneNumberConfirmed = Input.PhoneNumberConfirmed,
-                TwoFactorEnabled = Input.TwoFactorEnabled,
-                LockoutEnd = Input.LockoutEnd,
-                LockoutEnabled = Input.LockoutEnabled,
-                AccessFailedCount = Input.AccessFailedCount ?? 0,
-                NormalizedEmail = (Input.Email ?? "").ToUpper(),
-                NormalizedUserName = (Input.UserName ?? "").ToUpper()
-            };
+            var user = await _context.Users.FirstOrDefaultAsync(m => m.Id == Input.Id);
+            if (user == null) {
+                return NotFound();
+            }
+
+            user.Id = Input.Id;
+            user.FullName = Input.FullName;
+            user.UserName = Input.UserName;
+            user.Email = Input.Email;
+            user.EmailConfirmed = Input.EmailConfirmed;
+            user.PhoneNumber = Input.PhoneNumber;
+            user.PhoneNumberConfirmed = Input.PhoneNumberConfirmed;
+            user.TwoFactorEnabled = Input.TwoFactorEnabled;
+            user.LockoutEnd = Input.LockoutEnd;
+            user.LockoutEnabled = Input.LockoutEnabled;
+            user.AccessFailedCount = Input.AccessFailedCount ?? 0;
+            user.NormalizedEmail = (Input.Email ?? "").ToUpper();
+            user.NormalizedUserName = (Input.UserName ?? "").ToUpper();
             user.PasswordHash = new PasswordHasher<User>().HashPassword(user, Input.Password);
             user.SecurityStamp = Guid.NewGuid().ToString("D");
             user.ConcurrencyStamp = Guid.NewGuid().ToString("D");

@@ -5,4 +5,5 @@
 @import url("./post.css") layer(components);
 @import url("./icon.css") layer(components);
 @import url("./header.css") layer(components);
+@import url("./form.css") layer(components);
 @import url("./details.css") layer(details);

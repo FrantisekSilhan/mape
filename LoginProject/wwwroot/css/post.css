@@ -98,11 +98,6 @@
     font-size: 1rem;
 }
 
-.post-form__content-message {
-    font-size: 0.8rem;
-    color: hsl(var(--text-dimmed));
-}
-
 .post-form__btn-wrapper {
     width: 100%;
     display: flex;

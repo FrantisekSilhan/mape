@@ -14,16 +14,27 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.User[0].FullName)
+                <a asp-page="./Index" asp-route-sort="Id" asp-route-order="@Model.Order">
+                    @Html.DisplayNameFor(model => model.User[0].Id)
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.User[0].UserName)
+                <a asp-page="./Index" asp-route-sort="FullName" asp-route-order="@Model.Order">
+                    @Html.DisplayNameFor(model => model.User[0].FullName)
+                </a>
+            </th>
+            <th>
+                <a asp-page="./Index" asp-route-sort="UserName" asp-route-order="@Model.Order">
+                    @Html.DisplayNameFor(model => model.User[0].UserName)
+                </a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.User[0].NormalizedUserName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.User[0].Email)
+                <a asp-page="./Index" asp-route-sort="Email" asp-route-order="@Model.Order">
+                    @Html.DisplayNameFor(model => model.User[0].Email)
+                </a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.User[0].NormalizedEmail)
@@ -64,6 +75,9 @@
     <tbody>
 @foreach (var item in Model.User) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FullName)
             </td>

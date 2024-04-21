@@ -1,0 +1,34 @@
+﻿@page "Users/Search/"
+@model LoginProject.Pages.Users.SearchModel
+@{
+}
+
+<h1 class="title">Users</h1>
+<form method="post">
+    <div>
+        <label asp-for="Input.UserName"></label>
+        <input asp-for="Input.UserName" placeholder="Type username" />
+        <span asp-validation-for="Input.UserName" class="text--error"></span>
+    </div>
+    <button type="submit" class="btn">Search</button>
+</form>
+
+<div class="users">
+    @if (Model.Users != null) {
+        @if (Model.Users.Count == 0) {
+            <p>No users found</p>
+        } else {
+            <p>Users</p>
+            @foreach (var user in Model.Users) {
+                <div>
+                    <a asp-page="/Users/User" asp-route-username="@user.UserName">@user.UserName</a>
+                    <p>@user.PostsCount @(user.PostsCount == 1 ? "post" : "posts")</p>
+                </div>
+            }
+        }
+    }
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

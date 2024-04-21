@@ -9,7 +9,7 @@
         <div asp-validation-summary="ModelOnly"></div>
         <div class="post-form__content-wrapper">
             <textarea placeholder="What is happening?!" class="post-form__content" asp-for="Input.Content"></textarea>
-            <span class="post-form__content-message" asp-validation-for="Input.Content"></span>
+            <span class="text--error" asp-validation-for="Input.Content"></span>
         </div>
         <div class="post-form__btn-wrapper">
             <button class="post-form__btn" type="submit">Post</button>

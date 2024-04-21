@@ -77,3 +77,40 @@ main {
     margin-bottom: .5em;
     margin-left: .5em;
 }
+
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    background-color: hsl(var(--post-bg));
+    border: 1px solid hsl(var(--post-stroke));
+    border-radius: 1em;
+    padding: 1em;
+    position: relative;
+    margin-bottom: 1em;
+}
+
+ul {
+    margin-bottom: 1em;
+}
+
+ul li {
+    list-style: none;
+}
+
+a {
+    color: hsl(var(--text-dimmed));
+}
+
+a:hover {
+    color: hsl(var(--text));
+}
+
+ol {
+    margin-bottom: 1em;
+    margin-left: 1em;
+}
+
+.users div > * {
+    display: inline-block;
+}
