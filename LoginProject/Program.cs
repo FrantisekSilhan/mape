@@ -28,7 +28,8 @@ builder.Services.AddAuthorization(options => {
 builder.Services.AddRazorPages(options => {
     options.Conventions.AuthorizeAreaFolder("Admin", "/", "admin");
     options.Conventions.AuthorizeFolder("/Posts");
-    options.Conventions.AuthorizePage("/Post");
+    options.Conventions.AuthorizeFolder("/Users");
+    options.Conventions.AllowAnonymousToPage("/Posts/Index");
     options.Conventions.AuthorizePage("/Posts/Delete", "admin");
 });
 

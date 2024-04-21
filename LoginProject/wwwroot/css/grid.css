@@ -3,3 +3,10 @@
     grid-template-columns: 1fr 512px 1fr;
     position: relative;
 }
+
+@media (max-width: 768px) {
+    .page-grid {
+        display: block;
+        position: unset;
+    }
+}
