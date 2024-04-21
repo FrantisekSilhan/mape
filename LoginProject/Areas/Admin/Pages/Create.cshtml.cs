@@ -1,13 +1,13 @@
-﻿using LoginProject.Data;
-using LoginProject.Models;
+﻿using LoginProject.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace LoginProject.Areas.Admin.Pages {
     public class CreateModel : PageModel {
-        private readonly ApplicationDbContext _context;
+        private readonly LoginProject.Data.ApplicationDbContext _context;
 
-        public CreateModel(ApplicationDbContext context) {
+        public CreateModel(LoginProject.Data.ApplicationDbContext context) {
             _context = context;
         }
 
@@ -16,7 +16,7 @@ namespace LoginProject.Areas.Admin.Pages {
         }
 
         [BindProperty]
-        public User User { get; set; } = default!;
+        public UserIM Input { get; set; } = default!;
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync() {
@@ -24,7 +24,26 @@ namespace LoginProject.Areas.Admin.Pages {
                 return Page();
             }
 
-            _context.Users.Add(User);
+            User user = new User {
+                Id = Input.Id,
+                FullName = Input.FullName,
+                UserName = Input.UserName,
+                Email = Input.Email,
+                EmailConfirmed = Input.EmailConfirmed,
+                PhoneNumber = Input.PhoneNumber,
+                PhoneNumberConfirmed = Input.PhoneNumberConfirmed,
+                TwoFactorEnabled = Input.TwoFactorEnabled,
+                LockoutEnd = Input.LockoutEnd,
+                LockoutEnabled = Input.LockoutEnabled,
+                AccessFailedCount = Input.AccessFailedCount ?? 0,
+                ConcurrencyStamp = Guid.NewGuid().ToString("D"),
+                NormalizedEmail = (Input.Email ?? "").ToUpper(),
+                NormalizedUserName = (Input.UserName ?? "").ToUpper()
+            };
+            user.PasswordHash = new PasswordHasher<User>().HashPassword(user, Input.Password);
+            user.SecurityStamp = Guid.NewGuid().ToString("D");
+
+            _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

@@ -1,5 +1,5 @@
 ﻿@page
-@model Areas.Admin.Pages.EditModel
+@model LoginProject.Areas.Admin.Pages.EditModel
 
 @{
     ViewData["Title"] = "Edit";
@@ -14,80 +14,65 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="User.FullName" class="control-label"></label>
-                <input asp-for="User.FullName" class="form-control" />
-                <span asp-validation-for="User.FullName" class="text-danger"></span>
+                <label asp-for="Input.FullName" class="control-label"></label>
+                <input asp-for="Input.FullName" class="form-control" />
+                <span asp-validation-for="Input.FullName" class="text-danger"></span>
             </div>
-            <input type="hidden" asp-for="User.Id" />
+            <input type="hidden" asp-for="Input.Id" />
             <div class="form-group">
-                <label asp-for="User.UserName" class="control-label"></label>
-                <input asp-for="User.UserName" class="form-control" />
-                <span asp-validation-for="User.UserName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="User.NormalizedUserName" class="control-label"></label>
-                <input asp-for="User.NormalizedUserName" class="form-control" />
-                <span asp-validation-for="User.NormalizedUserName" class="text-danger"></span>
+                <label asp-for="Input.UserName" class="control-label"></label>
+                <input asp-for="Input.UserName" class="form-control" />
+                <span asp-validation-for="Input.UserName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="User.Email" class="control-label"></label>
-                <input asp-for="User.Email" class="form-control" />
-                <span asp-validation-for="User.Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="User.NormalizedEmail" class="control-label"></label>
-                <input asp-for="User.NormalizedEmail" class="form-control" />
-                <span asp-validation-for="User.NormalizedEmail" class="text-danger"></span>
+                <label asp-for="Input.Email" class="control-label"></label>
+                <input asp-for="Input.Email" class="form-control" />
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="User.EmailConfirmed" /> @Html.DisplayNameFor(model => model.User.EmailConfirmed)
+                    <input class="form-check-input" asp-for="Input.EmailConfirmed" /> @Html.DisplayNameFor(model => model.Input.EmailConfirmed)
                 </label>
             </div>
             <div class="form-group">
-                <label asp-for="User.PasswordHash" class="control-label"></label>
-                <input asp-for="User.PasswordHash" class="form-control" />
-                <span asp-validation-for="User.PasswordHash" class="text-danger"></span>
+                <label asp-for="Input.Password" class="control-label"></label>
+                <input asp-for="Input.Password" class="form-control" />
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="User.SecurityStamp" class="control-label"></label>
-                <input asp-for="User.SecurityStamp" class="form-control" />
-                <span asp-validation-for="User.SecurityStamp" class="text-danger"></span>
+                <label asp-for="Input.ConcurrencyStamp" class="control-label"></label>
+                <input asp-for="Input.ConcurrencyStamp" class="form-control" />
+                <span asp-validation-for="Input.ConcurrencyStamp" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="User.ConcurrencyStamp" class="control-label"></label>
-                <input asp-for="User.ConcurrencyStamp" class="form-control" />
-                <span asp-validation-for="User.ConcurrencyStamp" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="User.PhoneNumber" class="control-label"></label>
-                <input asp-for="User.PhoneNumber" class="form-control" />
-                <span asp-validation-for="User.PhoneNumber" class="text-danger"></span>
+                <label asp-for="Input.PhoneNumber" class="control-label"></label>
+                <input asp-for="Input.PhoneNumber" class="form-control" />
+                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="User.PhoneNumberConfirmed" /> @Html.DisplayNameFor(model => model.User.PhoneNumberConfirmed)
+                    <input class="form-check-input" asp-for="Input.PhoneNumberConfirmed" /> @Html.DisplayNameFor(model => model.Input.PhoneNumberConfirmed)
                 </label>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="User.TwoFactorEnabled" /> @Html.DisplayNameFor(model => model.User.TwoFactorEnabled)
+                    <input class="form-check-input" asp-for="Input.TwoFactorEnabled" /> @Html.DisplayNameFor(model => model.Input.TwoFactorEnabled)
                 </label>
             </div>
             <div class="form-group">
-                <label asp-for="User.LockoutEnd" class="control-label"></label>
-                <input asp-for="User.LockoutEnd" class="form-control" />
-                <span asp-validation-for="User.LockoutEnd" class="text-danger"></span>
+                <label asp-for="Input.LockoutEnd" class="control-label"></label>
+                <input asp-for="Input.LockoutEnd" class="form-control" />
+                <span asp-validation-for="Input.LockoutEnd" class="text-danger"></span>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="User.LockoutEnabled" /> @Html.DisplayNameFor(model => model.User.LockoutEnabled)
+                    <input class="form-check-input" asp-for="Input.LockoutEnabled" /> @Html.DisplayNameFor(model => model.Input.LockoutEnabled)
                 </label>
             </div>
             <div class="form-group">
-                <label asp-for="User.AccessFailedCount" class="control-label"></label>
-                <input asp-for="User.AccessFailedCount" class="form-control" />
-                <span asp-validation-for="User.AccessFailedCount" class="text-danger"></span>
+                <label asp-for="Input.AccessFailedCount" class="control-label"></label>
+                <input asp-for="Input.AccessFailedCount" class="form-control" />
+                <span asp-validation-for="Input.AccessFailedCount" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
