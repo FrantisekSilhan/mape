@@ -21,7 +21,7 @@ namespace LoginProject.Pages.Users {
             }
 
             Users = await _context.Users
-                .Where(s => s.UserName!.ToLower().Contains(Input.UserName))
+                .Where(s => s.UserName!.ToLower().Contains(Input.UserName.ToLower()))
                 .Select(s => new User {
                     Id = s.Id,
                     UserName = s.UserName,
