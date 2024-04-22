@@ -38,11 +38,10 @@ namespace LoginProject.Pages.Posts {
                 .ToListAsync();
 
             Replies = await _context.Posts.Where(p => p.ParentPostId == Post.PostId).ToListAsync();
-            if (Post.RootPostId == null) {
+            if (Post.RootPostId == null)
                 Post.RepliesCount = await _context.Posts.Where(p => p.RootPostId == Post.PostId).CountAsync();
-            } else {
+            else
                 Post.RepliesCount = Replies.Count;
-            }
 
             List<Guid> ids = Replies.Select(r => r.PostId).ToList();
             ids.AddRange(Thread.Select(p => p.PostId).ToList());
@@ -70,9 +69,8 @@ namespace LoginProject.Pages.Posts {
             });
             if (Thread.Count > 0) {
                 Thread[0].RepliesCount = await _context.Posts.Where(p => p.RootPostId == Post.RootPostId).CountAsync(); ;
-                if (Thread.Count > 1) {
+                if (Thread.Count > 1)
                     Thread[1].RepliesCount = groupedRepliesCount.FirstOrDefault(rc => rc.PostId == Thread[1].PostId)?.Count ?? 0;
-                }
             }
 
             CanDelete = User.IsInRole("admin") || User.IsInRole("moderator") || post.AuthorId == Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);

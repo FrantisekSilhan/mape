@@ -13,24 +13,20 @@ namespace LoginProject.Pages.Users {
             _users = users;
         }
         public async Task<IActionResult> OnPost(Guid id, string role) {
-            if (!User.Identity!.IsAuthenticated) {
-                return RedirectToPage("/Login");
-            }
+            if (!User.Identity!.IsAuthenticated)
+                return RedirectToPage("/Account/Login", new { area = "Identity" });
 
-            if (!User.IsInRole("admin")) {
+            if (!User.IsInRole("admin"))
                 return Forbid();
-            }
 
             var user = await _context.Users.FindAsync(id);
-            if (user == null) {
+            if (user == null)
                 return NotFound();
-            }
 
             var roles = await _users.GetRolesAsync(user);
 
-            if (roles.Contains("admin")) {
+            if (roles.Contains("admin"))
                 return Forbid();
-            }
 
             switch (role) {
                 case "moderator":

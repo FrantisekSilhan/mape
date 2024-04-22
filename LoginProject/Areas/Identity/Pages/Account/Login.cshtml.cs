@@ -102,6 +102,10 @@ namespace LoginProject.Areas.Identity.Pages.Account {
                     result = await _signInManager.PasswordSignInAsync(Input.UserName, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 } else {
                     var user = await _signInManager.UserManager.FindByEmailAsync(Input.UserName);
+                    if (user == null) {
+                        ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                        return Page();
+                    }
                     result = await _signInManager.PasswordSignInAsync(user.UserName, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 }
 

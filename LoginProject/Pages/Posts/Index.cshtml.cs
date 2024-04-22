@@ -37,6 +37,9 @@ namespace LoginProject.Pages.Posts {
         }
 
         public async Task<IActionResult> OnPostAsync() {
+            if (!User.Identity!.IsAuthenticated)
+                return RedirectToPage("/Account/Login", new { area = "Identity" });
+
             if (!ModelState.IsValid) {
                 Posts = await _context.Posts
                     .Include(p => p.Author)

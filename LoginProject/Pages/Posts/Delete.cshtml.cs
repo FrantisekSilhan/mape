@@ -10,28 +10,25 @@ namespace LoginProject.Pages.Posts {
             _context = context;
         }
         public async Task<IActionResult> OnPost(Guid? id) {
-            if (!User.Identity!.IsAuthenticated) {
-                return RedirectToPage("/Login");
-            }
+            if (!User.Identity!.IsAuthenticated)
+                return RedirectToPage("/Account/Login", new { area = "Identity" });
 
-            if (id == null) {
+            if (id == null)
                 return NotFound();
-            }
 
             var post = await _context.Posts.FindAsync(id);
             if (post == null) {
                 return NotFound();
             }
-            if (!User.IsInRole("admin") && !User.IsInRole("moderator") && post.AuthorId != Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!)) {
+            if (!User.IsInRole("admin") && !User.IsInRole("moderator") && post.AuthorId != Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!))
                 return Forbid();
-            }
 
             _context.Posts.Remove(post);
             await _context.SaveChangesAsync();
 
-            if (post.ParentPostId == null) {
+            if (post.ParentPostId == null)
                 return RedirectToPage("./Index");
-            }
+
             return RedirectToPage("./View", new { id = post.ParentPostId });
         }
     }

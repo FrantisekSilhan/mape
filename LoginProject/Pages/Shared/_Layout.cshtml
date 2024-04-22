@@ -27,7 +27,7 @@
                         </li>
                         @if (SignInManager.IsSignedIn(User)) {
                             <li class="navbar__item">
-                                <a class="navbar__link" asp-area="" asp-page="/Users/User" asp-route-username="@User.Identity!.Name">Profile</a>
+                                <a class="navbar__link" asp-area="" asp-page="/Users/User" asp-route-username="@User.Identity!.Name">@User.Identity!.Name</a>
                             </li>
                         }
                         <li class="navbar__item">

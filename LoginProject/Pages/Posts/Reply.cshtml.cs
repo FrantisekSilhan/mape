@@ -43,9 +43,8 @@ namespace LoginProject.Pages.Posts {
 
             if (Thread.Count > 0) {
                 Thread[0].RepliesCount = await _context.Posts.Where(p => p.RootPostId == Post.RootPostId).CountAsync();
-                if (Thread.Count > 1) {
+                if (Thread.Count > 1)
                     Thread[1].RepliesCount = await _context.Posts.Where(p => p.ParentPostId == Thread[1].PostId).CountAsync();
-                }
             }
 
             return Page();
@@ -77,9 +76,8 @@ namespace LoginProject.Pages.Posts {
 
                 if (Thread.Count > 0) {
                     Thread[0].RepliesCount = await _context.Posts.Where(p => p.RootPostId == Post.RootPostId).CountAsync();
-                    if (Thread.Count > 1) {
+                    if (Thread.Count > 1)
                         Thread[1].RepliesCount = await _context.Posts.Where(p => p.ParentPostId == Thread[1].PostId).CountAsync();
-                    }
                 }
 
                 return Page();

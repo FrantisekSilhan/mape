@@ -30,7 +30,7 @@ builder.Services.AddRazorPages(options => {
     options.Conventions.AuthorizeFolder("/Posts");
     options.Conventions.AuthorizeFolder("/Users");
     options.Conventions.AllowAnonymousToPage("/Posts/Index");
-    options.Conventions.AuthorizePage("/Posts/Delete", "admin");
+    options.Conventions.AuthorizePage("/Users/ChangeRole", "admin");
 });
 
 // dotnet user-secrets set "Authentication__Google__ClientId" "" --project LoginProject
