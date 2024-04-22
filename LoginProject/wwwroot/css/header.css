@@ -61,6 +61,8 @@
 
 .navbar__btn {
     cursor: pointer;
+    font: var(--font);
+    line-height: 1.5;
 }
 
 .navbar__hamburger {
