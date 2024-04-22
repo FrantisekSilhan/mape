@@ -41,3 +41,25 @@ span.text--error {
 hr {
     margin: .5em 0;
 }
+
+.blur {
+    position: relative;
+}
+
+.blur .blur__hidden {
+    filter: blur(.2em);
+}
+
+.blur__info {
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1em;
+    inset: 0;
+}
+
+.blur .blur__info {
+    display: flex;
+}
