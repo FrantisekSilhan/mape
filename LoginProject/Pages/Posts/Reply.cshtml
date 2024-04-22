@@ -12,7 +12,7 @@
                 <span class="post__line"></span>
                     <div class="post__top">
                         <a class="post__username" asp-page="/Users/User" asp-route-username="@post.Author.UserName">@post.Author.UserName</a>
-                        <p class="post__time">@DateTimeHelper.ConvertTimeToString(post.CreatedAt)</p>
+                        <p class="post__time">@DateTimeHelper.ConvertTimeToString(post.CreatedAt)@(post.EditedAt != null ? $" (edited)" : "")</p>
                     </div>
                     <pre class="post__content">@Html.Raw(post.Content)</pre>
                 <div class="post__action">
@@ -20,14 +20,14 @@
                 </div>
             </div>
         }
-        <div class="post post--main" id="post-main">
-                <div class="post__top">
-                    <a class="post__username" asp-page="/Users/User" asp-route-username="@Model.Post.Author.UserName">@Model.Post.Author.UserName</a>
-                </div>
-                <pre class="post__content">@Html.Raw(Model.Post.Content)</pre>
-                <div class="post__time-wrapper">
-                    <p class="post__time">@Model.Post.CreatedAt</p>
-                </div>
+        <div class="post post--main" id="post-main" data-id="@Model.Post.PostId">
+            <div class="post__top">
+                <a class="post__username" asp-page="/Users/User" asp-route-username="@Model.Post.Author.UserName">@Model.Post.Author.UserName</a>
+            </div>
+            <pre class="post__content">@Html.Raw(Model.Post.Content)</pre>
+            <div class="post__time-wrapper">
+                <p class="post__time">@Model.Post.CreatedAt@(Model.Post.EditedAt != null ? $" (edited)" : "")</p>
+            </div>
             <div class="post__action">
                 <a class="post__icon icon-wrapper" asp-page="./Reply" asp-route-id="@Model.Post.PostId"><i class="icon icon--comment"></i>@Model.Post.RepliesCount</a>
             </div>

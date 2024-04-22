@@ -21,15 +21,14 @@
     padding: 1em;
     position: relative;
     transition: background ease-in-out .05s;
+}
+
+.post[data-id] {
     cursor: pointer;
 }
 
 .post[data-id]:hover {
     background-color: hsl(var(--post-hover));
-}
-
-.post.post--main {
-    cursor: default;
 }
 
 .post__username {
@@ -113,8 +112,17 @@
     border-radius: 1em;
     padding: .5em 2em;
     cursor: pointer;
+    font-family: var(--font);
+    font-size: 1rem;
+    line-height: 1.5;
 }
 
 .post-form__btn:hover {
     background-color: hsl(var(--post-hover));
+    color: hsl(var(--text));
+}
+
+.post__icons {
+    display: flex;
+    gap: .5em;
 }

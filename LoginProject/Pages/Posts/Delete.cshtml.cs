@@ -9,7 +9,7 @@ namespace LoginProject.Pages.Posts {
         public DeleteModel(Data.ApplicationDbContext context) {
             _context = context;
         }
-        public async Task<IActionResult> OnPost(Guid? id) {
+        public async Task<IActionResult> OnPostAsync(Guid? id) {
             if (!User.Identity!.IsAuthenticated)
                 return RedirectToPage("/Account/Login", new { area = "Identity" });
 

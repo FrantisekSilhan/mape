@@ -16,8 +16,11 @@ namespace LoginProject.Pages.Posts {
         public List<Post> Replies { get; set; } = default!;
         public List<Post> Thread { get; set; } = default!;
         public bool CanDelete { get; set; } = default!;
+        private int PageSize { get; set; } = 10;
+        public int CurrentPage { get; set; } = default!;
+        public int TotalPages { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(Guid? id) {
+        public async Task<IActionResult> OnGetAsync(Guid? id, int peji = 1) {
             if (id == null)
                 return NotFound();
 
@@ -37,7 +40,12 @@ namespace LoginProject.Pages.Posts {
                 .OrderBy(p => p.CreatedAt)
                 .ToListAsync();
 
-            Replies = await _context.Posts.Where(p => p.ParentPostId == Post.PostId).ToListAsync();
+            Replies = await _context.Posts
+                .Where(p => p.ParentPostId == Post.PostId)
+                .OrderByDescending(p => p.CreatedAt)
+                .Skip((peji - 1) * PageSize)
+                .Take(PageSize)
+                .ToListAsync();
             if (Post.RootPostId == null)
                 Post.RepliesCount = await _context.Posts.Where(p => p.RootPostId == Post.PostId).CountAsync();
             else
@@ -74,6 +82,9 @@ namespace LoginProject.Pages.Posts {
             }
 
             CanDelete = User.IsInRole("admin") || User.IsInRole("moderator") || post.AuthorId == Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+
+            CurrentPage = peji;
+            TotalPages = (int)Math.Ceiling(await _context.Posts.Where(p => p.ParentPostId == id).CountAsync() / (double)PageSize);
 
             return Page();
         }

@@ -5,6 +5,7 @@ namespace LoginProject.Models {
         public Guid PostId { get; set; } = default!;
         public string Content { get; set; } = default!;
         public DateTime CreatedAt { get; set; } = default!;
+        public DateTime? EditedAt { get; set; } = default!;
 
         public Guid AuthorId { get; set; } = default!;
         [ForeignKey(nameof(AuthorId))]

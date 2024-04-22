@@ -45,6 +45,14 @@
     background-image: url("/img/demote-hover.svg");
 }
 
+.icon--edit {
+    background-image: url("/img/edit.svg");
+}
+
+.icon-wrapper:hover .icon--edit {
+    background-image: url("/img/edit-hover.svg");
+}
+
 .icon-wrapper {
     font-size: 0.75rem;
     color: hsl(var(--text-dimmed));

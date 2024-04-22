@@ -1,5 +1,6 @@
 ﻿@page "/Post/{id}"
 @using LoginProject.Utils
+@using System.Security.Claims
 @model LoginProject.Pages.Posts.ViewModel
 @{
 }
@@ -13,7 +14,7 @@
             <span class="post__line"></span>
                 <div class="post__top">
                     <a class="post__username" asp-page="/Users/User" asp-route-username="@post.Author.UserName">@post.Author.UserName</a>
-                    <p class="post__time">@DateTimeHelper.ConvertTimeToString(post.CreatedAt)</p>
+                    <p class="post__time">@DateTimeHelper.ConvertTimeToString(post.CreatedAt)@(post.EditedAt != null ? $" (edited)" : "")</p>
                 </div>
                 <pre class="post__content">@Html.Raw(post.Content)</pre>
             <div class="post__action">
@@ -25,17 +26,26 @@
         <div class="post post--main" id="post-main">
             <div class="post__top flex--spacebetween">
                 <a class="post__username" asp-page="/Users/User" asp-route-username="@Model.Post.Author.UserName">@Model.Post.Author.UserName</a>
-                @if (Model.CanDelete) {
+                <div class="post__icons">
+                    @if (Model.Post.AuthorId == Guid.Parse(Model.User.FindFirstValue(ClaimTypes.NameIdentifier)!)) {
+                    <form asp-page="./Edit" asp-route-id="@Model.Post.PostId" method="get">
+                        <button type="submit" class="icon-wrapper">
+                            <i class="icon icon--edit"></i>
+                        </button>
+                    </form>
+                    }
+                    @if (Model.CanDelete) {
                     <form asp-page="./Delete" asp-route-id="@Model.Post.PostId" method="post">
                         <button type="submit" class="icon-wrapper">
                             <i class="icon icon--delete"></i>
                         </button>
                     </form>
-                }
+                    }
+                </div>
             </div>
             <pre class="post__content">@Html.Raw(Model.Post.Content)</pre>
             <div class="post__time-wrapper">
-                <p class="post__time">@Model.Post.CreatedAt</p>
+                <p class="post__time">@Model.Post.CreatedAt@(Model.Post.EditedAt != null ? $" (edited)" : "")</p>
             </div>
             <div class="post__action">
                 <a class="post__icon icon-wrapper" asp-page="./Reply" asp-route-id="@Model.Post.PostId"><i class="icon icon--comment"></i>@Model.Post.RepliesCount</a>
@@ -44,12 +54,35 @@
     </div>
 
     <div class="posts__replies">
+        <div class="posts__pagination">
+    @if (Model.TotalPages > 1) {
+        @if (Model.TotalPages >= 3) {
+            @if (Model.CurrentPage > 2) {
+                <a class="" asp-page="./View" asp-route-peji="1">1</a>
+                <span>...</span>
+            }
+
+            @for (int i = Math.Max(1, Model.CurrentPage - 1); i <= Math.Min(Model.TotalPages, Model.CurrentPage + 1); i++) {
+                <a class="@(i == Model.CurrentPage ? "active" : "")" asp-page="./View" asp-route-peji="@i">@i</a>
+            }
+
+            @if (Model.CurrentPage < Model.TotalPages - 1) {
+                <span>...</span>
+                <a class="" asp-page="./View" asp-route-peji="@Model.TotalPages">@Model.TotalPages</a>
+            }
+        } else {
+            @for (int i = 1; i <= Model.TotalPages; i++) {
+                <a class="@(i == Model.CurrentPage ? "active" : "")" asp-page="./View" asp-route-peji="@i">@i</a>
+            }
+        }
+    }
+        </div>
     @foreach (var reply in Model.Replies)
     {
         <div class="post" data-id="@reply.PostId">
             <div class="post__top">
                 <a class="post__username" asp-page="/Users/User" asp-route-username="@reply.Author.UserName">@reply.Author.UserName</a>
-                <p class="post__time">@DateTimeHelper.ConvertTimeToString(reply.CreatedAt)</p>
+                    <p class="post__time">@DateTimeHelper.ConvertTimeToString(reply.CreatedAt)@(reply.EditedAt != null ? $" (edited)" : "")</p>
             </div>
             <pre class="post__content">@Html.Raw(reply.Content)</pre>
             <div class="post__action">
@@ -57,5 +90,28 @@
             </div>
         </div>
     }
+        <div class="posts__pagination">
+    @if (Model.TotalPages > 1) {
+        @if (Model.TotalPages >= 3) {
+            @if (Model.CurrentPage > 2) {
+                <a class="" asp-page="./View" asp-route-peji="1">1</a>
+                <span>...</span>
+            }
+
+            @for (int i = Math.Max(1, Model.CurrentPage - 1); i <= Math.Min(Model.TotalPages, Model.CurrentPage + 1); i++) {
+                <a class="@(i == Model.CurrentPage ? "active" : "")" asp-page="./View" asp-route-peji="@i">@i</a>
+            }
+
+            @if (Model.CurrentPage < Model.TotalPages - 1) {
+                <span>...</span>
+                <a class="" asp-page="./View" asp-route-peji="@Model.TotalPages">@Model.TotalPages</a>
+            }
+        } else {
+            @for (int i = 1; i <= Model.TotalPages; i++) {
+                <a class="@(i == Model.CurrentPage ? "active" : "")" asp-page="./View" asp-route-peji="@i">@i</a>
+            }
+        }
+    }
+        </div>
     </div>
 </div>

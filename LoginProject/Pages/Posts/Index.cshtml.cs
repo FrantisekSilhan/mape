@@ -16,11 +16,16 @@ namespace LoginProject.Pages.Posts {
         public List<Post> Posts { get; set; } = default!;
         [BindProperty]
         public PostIM Input { get; set; } = default!;
-        public async Task<IActionResult> OnGetAsync() {
+        private int PageSize { get; set; } = 10;
+        public int CurrentPage { get; set; } = default!;
+        public int TotalPages { get; set; } = default!;
+        public async Task<IActionResult> OnGetAsync(int peji = 1) {
             Posts = await _context.Posts
                 .Include(p => p.Author)
                 .Where(p => p.RootPostId == null)
                 .OrderByDescending(p => p.CreatedAt)
+                .Skip((peji - 1) * PageSize)
+                .Take(PageSize)
                 .ToListAsync();
 
             var groupedRepliesCount = await _context.Posts
@@ -33,10 +38,13 @@ namespace LoginProject.Pages.Posts {
                 p.RepliesCount = groupedRepliesCount.FirstOrDefault(rc => rc.PostId == p.PostId)?.Count ?? 0;
             });
 
+            CurrentPage = peji;
+            TotalPages = (int)Math.Ceiling(await _context.Posts.Where(p => p.RootPostId == null).CountAsync() / (double)PageSize);
+
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync() {
+        public async Task<IActionResult> OnPostAsync(int peji = 1) {
             if (!User.Identity!.IsAuthenticated)
                 return RedirectToPage("/Account/Login", new { area = "Identity" });
 
@@ -44,6 +52,8 @@ namespace LoginProject.Pages.Posts {
                 Posts = await _context.Posts
                     .Include(p => p.Author)
                     .Where(p => p.RootPostId == null)
+                    .Skip((peji - 1) * PageSize)
+                    .Take(PageSize)
                     .OrderByDescending(p => p.CreatedAt)
                     .ToListAsync();
 
@@ -56,6 +66,9 @@ namespace LoginProject.Pages.Posts {
                 Posts.ForEach(p => {
                     p.RepliesCount = groupedRepliesCount.FirstOrDefault(rc => rc.PostId == p.PostId)?.Count ?? 0;
                 });
+
+                CurrentPage = peji;
+                TotalPages = (int)Math.Ceiling(await _context.Posts.Where(p => p.RootPostId == null).CountAsync() / (double)PageSize);
 
                 return Page();
             }

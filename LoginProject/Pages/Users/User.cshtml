@@ -22,12 +22,35 @@
 }
 
 <div class="posts">
+<div class="posts__pagination">
+@if (Model.TotalPages > 1) {
+    @if (Model.TotalPages >= 3) {
+        @if (Model.CurrentPage > 2) {
+            <a class="" asp-page="./User" asp-route-peji="1">1</a>
+            <span>...</span>
+        }
+
+        @for (int i = Math.Max(1, Model.CurrentPage - 1); i <= Math.Min(Model.TotalPages, Model.CurrentPage + 1); i++) {
+            <a class="@(i == Model.CurrentPage ? "active" : "")" asp-page="./User" asp-route-peji="@i">@i</a>
+        }
+
+        @if (Model.CurrentPage < Model.TotalPages - 1) {
+            <span>...</span>
+            <a class="" asp-page="./User" asp-route-peji="@Model.TotalPages">@Model.TotalPages</a>
+        }
+    } else {
+        @for (int i = 1; i <= Model.TotalPages; i++) {
+            <a class="@(i == Model.CurrentPage ? "active" : "")" asp-page="./User" asp-route-peji="@i">@i</a>
+        }
+    }
+}
+</div>
 @foreach (var post in Model.Posts)
 {
     <div class="post" data-id="@post.PostId">
         <div class="post__top">
             <a class="post__username" asp-page="/Users/User" asp-route-username="@post.Author.UserName">@post.Author.UserName</a>
-            <p class="post__time">@DateTimeHelper.ConvertTimeToString(post.CreatedAt)</p>
+            <p class="post__time">@DateTimeHelper.ConvertTimeToString(post.CreatedAt)@(post.EditedAt != null ? $" (edited)" : "")</p>
         </div>
         <pre class="post__content">@Html.Raw(post.Content)</pre>
         <div class="post__action">
@@ -35,4 +58,27 @@
         </div>
     </div>
 }
+<div class="posts__pagination">
+@if (Model.TotalPages > 1) {
+    @if (Model.TotalPages >= 3) {
+        @if (Model.CurrentPage > 2) {
+            <a class="" asp-page="./User" asp-route-peji="1">1</a>
+            <span>...</span>
+        }
+
+        @for (int i = Math.Max(1, Model.CurrentPage - 1); i <= Math.Min(Model.TotalPages, Model.CurrentPage + 1); i++) {
+            <a class="@(i == Model.CurrentPage ? "active" : "")" asp-page="./User" asp-route-peji="@i">@i</a>
+        }
+
+        @if (Model.CurrentPage < Model.TotalPages - 1) {
+            <span>...</span>
+            <a class="" asp-page="./User" asp-route-peji="@Model.TotalPages">@Model.TotalPages</a>
+        }
+    } else {
+        @for (int i = 1; i <= Model.TotalPages; i++) {
+            <a class="@(i == Model.CurrentPage ? "active" : "")" asp-page="./User" asp-route-peji="@i">@i</a>
+        }
+    }
+}
+</div>
 </div>

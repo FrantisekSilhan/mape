@@ -17,8 +17,11 @@ namespace LoginProject.Pages.Users {
         public User UserProfile { get; set; } = default!;
         public List<Post> Posts { get; set; } = default!;
         public bool CanEdit { get; set; } = default!;
+        private int PageSize { get; set; } = 10;
+        public int CurrentPage { get; set; } = default!;
+        public int TotalPages { get; set; } = default!;
 
-        public async Task<IActionResult> OnGet(string username) {
+        public async Task<IActionResult> OnGet(string username, int peji = 1) {
             var userProfile = await _users.FindByNameAsync(username);
 
             if (userProfile == null) {
@@ -30,7 +33,12 @@ namespace LoginProject.Pages.Users {
             UserProfile.IsModerator = await _users.IsInRoleAsync(UserProfile, "moderator");
             CanEdit = User.IsInRole("admin") && !await _users.IsInRoleAsync(UserProfile, "admin");
 
-            Posts = await _context.Posts.Where(p => p.AuthorId == UserProfile.Id).OrderByDescending(p => p.CreatedAt).ToListAsync();
+            Posts = await _context.Posts
+                .Where(p => p.AuthorId == UserProfile.Id)
+                .OrderByDescending(p => p.CreatedAt)
+                .Skip((peji - 1) * PageSize)
+                .Take(PageSize)
+                .ToListAsync();
 
             var groupedRepliesCount = await _context.Posts
                 .Where(p => Posts.Select(p => p.PostId).ToList().Contains((Guid)p.ParentPostId!))
@@ -41,6 +49,9 @@ namespace LoginProject.Pages.Users {
             Posts.ForEach(p => {
                 p.RepliesCount = groupedRepliesCount.FirstOrDefault(rc => rc.PostId == p.PostId)?.Count ?? 0;
             });
+
+            CurrentPage = peji;
+            TotalPages = (int)Math.Ceiling(await _context.Posts.Where(p => p.AuthorId == UserProfile.Id).CountAsync() / (double)PageSize);
 
             return Page();
         }

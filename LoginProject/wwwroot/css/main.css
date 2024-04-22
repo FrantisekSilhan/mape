@@ -115,3 +115,15 @@ ol {
 .users div > * {
     display: inline-block;
 }
+
+a.active {
+    color: hsl(var(--text));
+}
+
+.posts__pagination {
+    margin: 0 auto;
+}
+
+.posts__pagination a {
+    padding: .25em .5em;
+}

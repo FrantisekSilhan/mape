@@ -1,0 +1,41 @@
+﻿@page "/Post/{id}/Edit"
+@using LoginProject.Utils
+@model LoginProject.Pages.Posts.EditModel
+@{
+}
+
+<a class="icon-wrapper icon-wrapper--s2" asp-page="./Index"><i class="icon icon--leftarrow"></i>Posts</a>
+<div class="posts">
+        @foreach (var post in Model.Thread) {
+        <div class="post" data-id="@post.PostId">
+            <span class="post__line"></span>
+            <div class="post__top">
+                <a class="post__username" asp-page="/Users/User" asp-route-username="@post.Author.UserName">@post.Author.UserName</a>
+                <p class="post__time">@DateTimeHelper.ConvertTimeToString(post.CreatedAt)@(post.EditedAt != null ? $" (edited)" : "")</p>
+            </div>
+            <pre class="post__content">@Html.Raw(post.Content)</pre>
+            <div class="post__action">
+                <a class="post__icon icon-wrapper" asp-page="./Reply" asp-route-id="@post.PostId"><i class="icon icon--comment"></i>@post.RepliesCount</a>
+            </div>
+        </div>
+    }
+    <form class="post post--main post-form margin-left" method="post">
+        <div asp-validation-summary="ModelOnly"></div>
+        <div class="post__top">
+            <a class="post__username" asp-page="/Users/User" asp-route-username="@Model.Post.Author.UserName">@Model.Post.Author.UserName</a>
+        </div>
+        <div class="post-form__content-wrapper">
+            <textarea placeholder="Post your reply" class="post-form__content" asp-for="Input.Content"></textarea>
+            <span class="text--error" asp-validation-for="Input.Content"></span>
+        </div>
+        <div class="post__time-wrapper">
+            <p class="post__time">@Model.Post.CreatedAt@(Model.Post.EditedAt != null ? $" (edited)" : "")</p>
+        </div>
+        <div class="post__icons">
+            <div class="post-form__btn-wrapper">
+                <a class="post-form__btn" asp-page="./View" asp-route-id="@Model.Post.PostId">Cancel</a>
+                <button class="post-form__btn" type="submit">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
