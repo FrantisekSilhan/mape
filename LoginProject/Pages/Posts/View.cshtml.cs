@@ -41,6 +41,7 @@ namespace LoginProject.Pages.Posts {
                 .ToListAsync();
 
             Replies = await _context.Posts
+                .Include(p => p.Author)
                 .Where(p => p.ParentPostId == Post.PostId)
                 .OrderByDescending(p => p.CreatedAt)
                 .Skip((peji - 1) * PageSize)

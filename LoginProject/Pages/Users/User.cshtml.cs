@@ -34,6 +34,7 @@ namespace LoginProject.Pages.Users {
             CanEdit = User.IsInRole("admin") && !await _users.IsInRoleAsync(UserProfile, "admin");
 
             Posts = await _context.Posts
+                .Include(p => p.Author)
                 .Where(p => p.AuthorId == UserProfile.Id)
                 .OrderByDescending(p => p.CreatedAt)
                 .Skip((peji - 1) * PageSize)

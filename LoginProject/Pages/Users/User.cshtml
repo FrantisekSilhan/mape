@@ -54,7 +54,7 @@
         </div>
         <pre class="post__content">@Html.Raw(post.Content)</pre>
         <div class="post__action">
-            <a class="post__icon icon-wrapper" asp-page="./Reply" asp-route-id="@post.PostId"><i class="icon icon--comment"></i>@post.RepliesCount</a>
+            <a class="post__icon icon-wrapper" asp-page="/Posts/Reply" asp-route-id="@post.PostId"><i class="icon icon--comment"></i>@post.RepliesCount</a>
         </div>
     </div>
 }
