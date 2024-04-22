@@ -28,6 +28,12 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
             NormalizedName = "ADMIN",
         });
 
+        builder.Entity<IdentityRole<Guid>>().HasData(new IdentityRole<Guid> {
+            Id = Guid.NewGuid(),
+            Name = "moderator",
+            NormalizedName = "MODERATOR",
+        });
+
         builder.Entity<User>(entity => {
             PasswordHasher<User> hasher = new PasswordHasher<User>();
             entity.HasData(new User {

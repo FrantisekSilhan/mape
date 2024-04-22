@@ -75,7 +75,7 @@ namespace LoginProject.Pages.Posts {
                 }
             }
 
-            CanDelete = User.IsInRole("admin") || post.AuthorId == Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+            CanDelete = User.IsInRole("admin") || User.IsInRole("moderator") || post.AuthorId == Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
 
             return Page();
         }

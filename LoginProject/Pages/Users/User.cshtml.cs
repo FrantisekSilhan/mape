@@ -14,15 +14,21 @@ namespace LoginProject.Pages.Users {
             _users = users;
         }
 
-        public User? UserProfile { get; set; } = default!;
+        public User UserProfile { get; set; } = default!;
         public List<Post> Posts { get; set; } = default!;
+        public bool CanEdit { get; set; } = default!;
 
         public async Task<IActionResult> OnGet(string username) {
-            UserProfile = await _users.FindByNameAsync(username);
+            var userProfile = await _users.FindByNameAsync(username);
 
-            if (UserProfile == null) {
+            if (userProfile == null) {
                 return NotFound();
             }
+
+            UserProfile = userProfile;
+
+            UserProfile.IsModerator = await _users.IsInRoleAsync(UserProfile, "moderator");
+            CanEdit = User.IsInRole("admin") && !await _users.IsInRoleAsync(UserProfile, "admin");
 
             Posts = await _context.Posts.Where(p => p.AuthorId == UserProfile.Id).OrderByDescending(p => p.CreatedAt).ToListAsync();
 

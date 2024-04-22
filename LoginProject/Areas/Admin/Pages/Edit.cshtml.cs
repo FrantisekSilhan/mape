@@ -55,7 +55,6 @@ namespace LoginProject.Areas.Admin.Pages {
                 return NotFound();
             }
 
-            user.Id = Input.Id;
             user.FullName = Input.FullName;
             user.UserName = Input.UserName;
             user.Email = Input.Email;
@@ -68,7 +67,8 @@ namespace LoginProject.Areas.Admin.Pages {
             user.AccessFailedCount = Input.AccessFailedCount ?? 0;
             user.NormalizedEmail = (Input.Email ?? "").ToUpper();
             user.NormalizedUserName = (Input.UserName ?? "").ToUpper();
-            user.PasswordHash = new PasswordHasher<User>().HashPassword(user, Input.Password);
+            if (Input.Password != null)
+                user.PasswordHash = new PasswordHasher<User>().HashPassword(user, Input.Password);
             user.SecurityStamp = Guid.NewGuid().ToString("D");
             user.ConcurrencyStamp = Guid.NewGuid().ToString("D");
 
@@ -100,7 +100,7 @@ namespace LoginProject.Areas.Admin.Pages {
         [Required]
         public bool EmailConfirmed { get; set; } = default!;
         [Required]
-        public string Password { get; set; } = default!;
+        public string? Password { get; set; } = default!;
         public string? PhoneNumber { get; set; } = default!;
         [Required]
         public bool PhoneNumberConfirmed { get; set; } = default!;

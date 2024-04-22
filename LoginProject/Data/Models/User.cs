@@ -7,5 +7,7 @@ namespace LoginProject.Models {
         public ICollection<Post>? Posts { get; set; } = default!;
         [NotMapped]
         public int PostsCount { get; set; } = default!;
+        [NotMapped]
+        public bool IsModerator { get; set; } = default!;
     }
 }

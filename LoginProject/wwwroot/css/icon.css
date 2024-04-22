@@ -29,6 +29,22 @@
     background-image: url("/img/delete-hover.svg");
 }
 
+.icon--promote {
+    background-image: url("/img/promote.svg");
+}
+
+.icon-wrapper:hover .icon--promote {
+    background-image: url("/img/promote-hover.svg");
+}
+
+.icon--demote {
+    background-image: url("/img/demote.svg");
+}
+
+.icon-wrapper:hover .icon--demote {
+    background-image: url("/img/demote-hover.svg");
+}
+
 .icon-wrapper {
     font-size: 0.75rem;
     color: hsl(var(--text-dimmed));

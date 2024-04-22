@@ -4,17 +4,32 @@
 @{
 }
 
-<h1 class="title">@Model.UserProfile!.UserName's posts</h1>
+<h1 class="title">@Model.UserProfile.UserName's posts</h1>
+@if (Model.CanEdit) {
+    if (Model.UserProfile.IsModerator) {
+        <form class="margin-bottom" asp-page="./ChangeRole" asp-route-id="@Model.UserProfile.Id" asp-route-role="moderator" method="post">
+            <button type="submit" class="icon-wrapper">
+                <i class="icon icon--demote"></i>Demote
+            </button>
+        </form>
+    } else {
+        <form class="margin-bottom" asp-page="./ChangeRole" asp-route-id="@Model.UserProfile.Id" asp-route-role="moderator" method="post">
+            <button type="submit" class="icon-wrapper">
+                <i class="icon icon--promote"></i>Promote
+            </button>
+        </form>
+    }
+}
 
 <div class="posts">
 @foreach (var post in Model.Posts)
 {
     <div class="post" data-id="@post.PostId">
-            <div class="post__top">
-                <a class="post__username" asp-page="/Users/User" asp-route-username="@post.Author.UserName">@post.Author.UserName</a>
-                <p class="post__time">@DateTimeHelper.ConvertTimeToString(post.CreatedAt)</p>
-            </div>
-            <pre class="post__content">@Html.Raw(post.Content)</pre>
+        <div class="post__top">
+            <a class="post__username" asp-page="/Users/User" asp-route-username="@post.Author.UserName">@post.Author.UserName</a>
+            <p class="post__time">@DateTimeHelper.ConvertTimeToString(post.CreatedAt)</p>
+        </div>
+        <pre class="post__content">@Html.Raw(post.Content)</pre>
         <div class="post__action">
             <a class="post__icon icon-wrapper" asp-page="./Reply" asp-route-id="@post.PostId"><i class="icon icon--comment"></i>@post.RepliesCount</a>
         </div>
