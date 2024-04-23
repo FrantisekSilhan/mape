@@ -79,10 +79,6 @@ span.username {
     white-space: nowrap;
 }
 
-.username-wrapper .username {
-    margin-right: -.3em;
-}
-
 .username,
 .post__username {
     text-overflow: ellipsis;
