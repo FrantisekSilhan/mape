@@ -2,6 +2,7 @@
 @using LoginProject.Utils
 @model LoginProject.Pages.Users.UserModel
 @{
+    ViewData["Title"] = Model.UserProfile.UserName;
 }
 
 <h1 class="title">@Model.UserProfile.UserName's posts</h1>
