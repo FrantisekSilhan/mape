@@ -23,12 +23,12 @@ body {
 */
 
 :root {
-    --text-dimmed: 32 33 67;
-    --text: 31 33 88;
-    --bg: 30 11 4;
-    --post-bg: 199 27 18;
-    --post-stroke: 33 20 31;
-    --post-hover: 199 27 22;
+    --text-dimmed: 32 33% 67%;
+    --text: 31 33% 88%;
+    --bg: 30 11% 4%;
+    --post-bg: 199 27% 18%;
+    --post-stroke: 33 20% 31%;
+    --post-hover: 199 27% 22%;
     --font: "Poppins", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
