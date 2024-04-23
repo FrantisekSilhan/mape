@@ -20,6 +20,8 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
         builder.Entity<Post>().HasOne(p => p.ParentPost).WithMany().HasForeignKey(p => p.ParentPostId).OnDelete(DeleteBehavior.Cascade);
         builder.Entity<Post>().HasOne(p => p.RootPost).WithMany().HasForeignKey(p => p.RootPostId).OnDelete(DeleteBehavior.Cascade);
 
+        builder.Entity<User>().Property(u => u.UserName).HasMaxLength(32);
+
         Guid adminId = new("11111111-1111-1111-1111-111111111111");
 
         builder.Entity<IdentityRole<Guid>>().HasData(new IdentityRole<Guid> {

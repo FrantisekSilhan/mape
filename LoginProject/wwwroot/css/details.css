@@ -64,3 +64,28 @@ hr {
 .blur .blur__info {
     display: flex;
 }
+
+span.username {
+    display: inline-block;
+    max-width: 32ch;
+}
+
+.username {
+    max-width: 32ch;
+}
+
+.username-wrapper {
+    display: flex;
+    white-space: nowrap;
+}
+
+.username-wrapper .username {
+    margin-right: -.3em;
+}
+
+.username,
+.post__username {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}

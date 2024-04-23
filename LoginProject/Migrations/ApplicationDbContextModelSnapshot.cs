@@ -108,7 +108,7 @@ namespace LoginProject.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("UserName")
-                        .HasMaxLength(256)
+                        .HasMaxLength(32)
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -127,14 +127,14 @@ namespace LoginProject.Migrations
                         {
                             Id = new Guid("11111111-1111-1111-1111-111111111111"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0fc83a65-b125-4566-81af-7b7e35fda6a8",
+                            ConcurrencyStamp = "d6029b04-55c5-4f07-978c-fc070d554ef2",
                             Email = "admin@local.slhn.cz",
                             EmailConfirmed = true,
                             FullName = "Administrator User",
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCAL.SLHN.CZ",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOcT9FEDVOxSRy53Bp5OfIs7JX0i1LtiuOo8SFdr0Kuzylt0EWvF7JJTx3gErXmDQg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEF+VBntQnqcvTHfF6EHzT+mpYkHu8/2LAJmW95+10Q4r1n6+EZrORzWbPugM9O5C3Q==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "Asdfiasjfisda",
                             TwoFactorEnabled = false,
@@ -177,7 +177,7 @@ namespace LoginProject.Migrations
                         },
                         new
                         {
-                            Id = new Guid("63fd0f58-233c-46c4-80ba-b488a7ae0fa6"),
+                            Id = new Guid("ea1ffcfe-906d-4606-9b3a-cee036a08511"),
                             Name = "moderator",
                             NormalizedName = "MODERATOR"
                         });

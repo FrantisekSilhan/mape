@@ -5,7 +5,7 @@
     ViewData["Title"] = Model.UserProfile.UserName;
 }
 
-<h1 class="title">@Model.UserProfile.UserName's posts</h1>
+<h1 class="title username-wrapper"><span class="username">@Model.UserProfile.UserName</span>'s posts</h1>
 @if (Model.CanEdit) {
     if (Model.UserProfile.IsModerator) {
         <form class="margin-bottom" asp-page="./ChangeRole" asp-route-id="@Model.UserProfile.Id" asp-route-role="moderator" method="post">

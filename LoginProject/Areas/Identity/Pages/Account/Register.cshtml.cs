@@ -61,6 +61,7 @@ namespace LoginProject.Areas.Identity.Pages.Account {
         /// </summary>
         public class InputModel {
             [Required]
+            [MaxLength(32)]
             [Display(Name = "User Name")]
             public string UserName { get; set; }
 
