@@ -32,6 +32,17 @@ body {
     --font: "Poppins", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
+@media (prefers-color-scheme: light) {
+    :root {
+        --text-dimmed: 32 33% 33%;
+        --text: 31 33% 12%;
+        --bg: 30 11% 96%;
+        --post-bg: 199 27% 82%;
+        --post-stroke: 33 20% 69%;
+        --post-hover: 199 27% 78%;
+    }
+}
+
 html {
     font-size: 14px;
     font-family: var(--font);

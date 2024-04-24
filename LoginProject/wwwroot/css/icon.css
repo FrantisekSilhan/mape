@@ -72,3 +72,53 @@
     color: hsl(var(--text));
     cursor: pointer;
 }
+
+@media (prefers-color-scheme: light) {
+    .icon--comment {
+        background-image: url("/img/light-comment.svg");
+    }
+
+    .icon-wrapper:hover .icon--comment {
+        background-image: url("/img/light-comment-hover.svg");
+    }
+
+    .icon--leftarrow {
+        background-image: url("/img/light-leftarrow.svg");
+    }
+
+    .icon-wrapper:hover .icon--leftarrow {
+        background-image: url("/img/light-leftarrow-hover.svg");
+    }
+
+    .icon--delete {
+        background-image: url("/img/light-delete.svg");
+    }
+
+    .icon-wrapper:hover .icon--delete {
+        background-image: url("/img/light-delete-hover.svg");
+    }
+
+    .icon--promote {
+        background-image: url("/img/light-promote.svg");
+    }
+
+    .icon-wrapper:hover .icon--promote {
+        background-image: url("/img/light-promote-hover.svg");
+    }
+
+    .icon--demote {
+        background-image: url("/img/light-demote.svg");
+    }
+
+    .icon-wrapper:hover .icon--demote {
+        background-image: url("/img/light-demote-hover.svg");
+    }
+
+    .icon--edit {
+        background-image: url("/img/light-edit.svg");
+    }
+
+    .icon-wrapper:hover .icon--edit {
+        background-image: url("/img/light-edit-hover.svg");
+    }
+}
