@@ -138,3 +138,7 @@ a.active {
 .posts__pagination a {
     padding: .25em .5em;
 }
+
+input::placeholder {
+    color: hsl(var(--text-dimmed) / .8);
+}
