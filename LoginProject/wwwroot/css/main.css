@@ -23,23 +23,23 @@ body {
 */
 
 :root {
-    --text-dimmed: 32 33% 67%;
-    --text: 31 33% 88%;
-    --bg: 30 11% 4%;
-    --post-bg: 199 27% 18%;
-    --post-stroke: 33 20% 31%;
-    --post-hover: 199 27% 22%;
+    --text-dimmed: 219 28% 75%;
+    --text: 219 28% 88%;
+    --bg: 220 16% 22%;
+    --post-bg: 220 16% 22%;
+    --post-stroke: 219 15% 50%;
+    --post-hover: 220 16% 25%;
     --font: "Poppins", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 @media (prefers-color-scheme: light) {
     :root {
-        --text-dimmed: 32 33% 33%;
-        --text: 31 33% 12%;
-        --bg: 30 11% 96%;
-        --post-bg: 199 27% 82%;
-        --post-stroke: 33 20% 69%;
-        --post-hover: 199 27% 78%;
+        --text-dimmed: 220 16% 35%;
+        --text: 220 16% 22%;
+        --bg: 218 27% 94%;
+        --post-bg: 218 27% 94%;
+        --post-stroke: 221 16% 50%;
+        --post-hover: 218 27% 91%;
     }
 }
 

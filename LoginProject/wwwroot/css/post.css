@@ -97,6 +97,10 @@
     font-size: 1rem;
 }
 
+.post-form__content::placeholder {
+    color: hsl(var(--text-dimmed) / .8);
+}
+
 .post-form__btn-wrapper {
     width: 100%;
     display: flex;
