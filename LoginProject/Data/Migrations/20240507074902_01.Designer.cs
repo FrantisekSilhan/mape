@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace LoginProject.Migrations
+namespace LoginProject.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240422102359_04")]
-    partial class _04
+    [Migration("20240507074902_01")]
+    partial class _01
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,6 +38,9 @@ namespace LoginProject.Migrations
                         .HasColumnType("TEXT")
                         .HasDefaultValue(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
 
+                    b.Property<DateTime?>("EditedAt")
+                        .HasColumnType("TEXT");
+
                     b.Property<Guid?>("ParentPostId")
                         .HasColumnType("TEXT");
 
@@ -53,6 +56,137 @@ namespace LoginProject.Migrations
                     b.HasIndex("RootPostId");
 
                     b.ToTable("Posts", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            PostId = new Guid("014292c4-1df5-4c50-9835-047475fd7d50"),
+                            AuthorId = new Guid("11111111-1111-1111-1111-111111111111"),
+                            Content = "This is the first post by an admin",
+                            CreatedAt = new DateTime(2024, 5, 7, 9, 49, 0, 851, DateTimeKind.Local).AddTicks(9902)
+                        },
+                        new
+                        {
+                            PostId = new Guid("1027f597-5302-41b2-b756-52fa91ca6918"),
+                            AuthorId = new Guid("22222222-2222-2222-2222-222222222222"),
+                            Content = "This is the first post by a moderator",
+                            CreatedAt = new DateTime(2024, 5, 7, 9, 49, 0, 852, DateTimeKind.Local).AddTicks(3)
+                        },
+                        new
+                        {
+                            PostId = new Guid("60aa66bc-eb2f-4414-a79f-18910924ca87"),
+                            AuthorId = new Guid("7cb67635-0e88-447c-9997-3bec8323b902"),
+                            Content = "This is a first reply to the first post by an admin",
+                            CreatedAt = new DateTime(2024, 5, 7, 9, 49, 0, 852, DateTimeKind.Local).AddTicks(84),
+                            ParentPostId = new Guid("014292c4-1df5-4c50-9835-047475fd7d50"),
+                            RootPostId = new Guid("014292c4-1df5-4c50-9835-047475fd7d50")
+                        },
+                        new
+                        {
+                            PostId = new Guid("6da98fcb-cadf-40c0-b074-fdb0925c3520"),
+                            AuthorId = new Guid("7cb67635-0e88-447c-9997-3bec8323b902"),
+                            Content = "This is a second reply to the first post by an admin",
+                            CreatedAt = new DateTime(2024, 5, 7, 9, 49, 0, 852, DateTimeKind.Local).AddTicks(128),
+                            ParentPostId = new Guid("014292c4-1df5-4c50-9835-047475fd7d50"),
+                            RootPostId = new Guid("014292c4-1df5-4c50-9835-047475fd7d50")
+                        },
+                        new
+                        {
+                            PostId = new Guid("db83e26f-5b9d-4a8a-9df5-c8dd196b6097"),
+                            AuthorId = new Guid("7cb67635-0e88-447c-9997-3bec8323b902"),
+                            Content = "This is a first reply to the first post by a moderator",
+                            CreatedAt = new DateTime(2024, 5, 7, 9, 49, 0, 852, DateTimeKind.Local).AddTicks(192),
+                            ParentPostId = new Guid("1027f597-5302-41b2-b756-52fa91ca6918"),
+                            RootPostId = new Guid("1027f597-5302-41b2-b756-52fa91ca6918")
+                        },
+                        new
+                        {
+                            PostId = new Guid("2db924b5-790f-4267-a5fe-1b46ff3de37a"),
+                            AuthorId = new Guid("7cb67635-0e88-447c-9997-3bec8323b902"),
+                            Content = "This is a second reply to the first post by a moderator",
+                            CreatedAt = new DateTime(2024, 5, 7, 9, 49, 0, 852, DateTimeKind.Local).AddTicks(297),
+                            ParentPostId = new Guid("1027f597-5302-41b2-b756-52fa91ca6918"),
+                            RootPostId = new Guid("1027f597-5302-41b2-b756-52fa91ca6918")
+                        },
+                        new
+                        {
+                            PostId = new Guid("df5473dd-f1d7-438d-a55f-780d30789165"),
+                            AuthorId = new Guid("7cb67635-0e88-447c-9997-3bec8323b902"),
+                            Content = "This is a reply to the first reply to the first post by an admin",
+                            CreatedAt = new DateTime(2024, 5, 7, 9, 49, 0, 852, DateTimeKind.Local).AddTicks(412),
+                            ParentPostId = new Guid("60aa66bc-eb2f-4414-a79f-18910924ca87"),
+                            RootPostId = new Guid("014292c4-1df5-4c50-9835-047475fd7d50")
+                        },
+                        new
+                        {
+                            PostId = new Guid("44a9c2d8-3473-4612-ba0a-0cccb9832430"),
+                            AuthorId = new Guid("11111111-1111-1111-1111-111111111111"),
+                            Content = "Já jsem teď trochu v ráži, ale může mi někdo vysvětlit ten obrovskej rozdíl mezi čistou a hrubou mzdou? Jako za co reálně odvádim desetitisíce? Já mám pocit, že za to dostávám úplný h***.",
+                            CreatedAt = new DateTime(2024, 5, 7, 9, 49, 0, 852, DateTimeKind.Local).AddTicks(496)
+                        },
+                        new
+                        {
+                            PostId = new Guid("4dedceb0-2506-423a-9c76-bc098adfcab5"),
+                            AuthorId = new Guid("7cb67635-0e88-447c-9997-3bec8323b902"),
+                            Content = "Zajímavé jak takovýto příspěvek vyvolává další a další negativní reakce.\r\nJe to pochopitelné. Ideál, který by navíc vyhovoval všem, neexistuje.😉\r\nVždy je co zlepšovat.\r\nNicméně všem stěžovatelům bych vždy doporučil aby se alespoň porozhlédli a srovnali si stav věcí u nás a v jiných zemích.\r\nZřejmě by nakonec byli docela překvapení, jaká může být realita.\r\nTím neříkám, že mi nic nevadí, ale planě nadávat nikam prostě nevede.\r\nA neštěstí je, že většina stěžovatelů potom navíc věří populistům.🤷",
+                            CreatedAt = new DateTime(2024, 5, 7, 9, 49, 0, 852, DateTimeKind.Local).AddTicks(530),
+                            ParentPostId = new Guid("44a9c2d8-3473-4612-ba0a-0cccb9832430"),
+                            RootPostId = new Guid("44a9c2d8-3473-4612-ba0a-0cccb9832430")
+                        },
+                        new
+                        {
+                            PostId = new Guid("9348323b-890c-4eec-86f5-f0b153ca4cd3"),
+                            AuthorId = new Guid("11111111-1111-1111-1111-111111111111"),
+                            Content = "Já určitě nejsem za na všechno nadávat, na druhou stranu, tohle je “můj” prostor, kde si s dávkou nadsázky můžu ulevit a nevidim důvod proč ne.☺️",
+                            CreatedAt = new DateTime(2024, 5, 7, 9, 49, 0, 852, DateTimeKind.Local).AddTicks(565),
+                            ParentPostId = new Guid("4dedceb0-2506-423a-9c76-bc098adfcab5"),
+                            RootPostId = new Guid("44a9c2d8-3473-4612-ba0a-0cccb9832430")
+                        },
+                        new
+                        {
+                            PostId = new Guid("21f4548e-ce50-4f88-b04e-df954232b2ee"),
+                            AuthorId = new Guid("7cb67635-0e88-447c-9997-3bec8323b902"),
+                            Content = "Nic proti.\r\nMá poznámka byla k tomu, jaké reakce to následně vyvolává.\r\nNic míň, nic víc.\r\nAť se ti daří.😉",
+                            CreatedAt = new DateTime(2024, 5, 7, 9, 49, 0, 852, DateTimeKind.Local).AddTicks(603),
+                            ParentPostId = new Guid("9348323b-890c-4eec-86f5-f0b153ca4cd3"),
+                            RootPostId = new Guid("44a9c2d8-3473-4612-ba0a-0cccb9832430")
+                        },
+                        new
+                        {
+                            PostId = new Guid("abc7cfd3-9bb7-44ed-b2eb-559b33e4243e"),
+                            AuthorId = new Guid("11111111-1111-1111-1111-111111111111"),
+                            Content = "Já to ani neberu a nemyslim nijak zle. Ale nemyslím si, že těch 5 lidí, kteří reagovali je nějaké šíření negativity. ☺️",
+                            CreatedAt = new DateTime(2024, 5, 7, 9, 49, 0, 852, DateTimeKind.Local).AddTicks(642),
+                            ParentPostId = new Guid("21f4548e-ce50-4f88-b04e-df954232b2ee"),
+                            RootPostId = new Guid("44a9c2d8-3473-4612-ba0a-0cccb9832430")
+                        },
+                        new
+                        {
+                            PostId = new Guid("3bee7ecf-bf4a-4dcf-ab88-5df3f7b878da"),
+                            AuthorId = new Guid("22222222-2222-2222-2222-222222222222"),
+                            Content = "T*l píšou ti tu boti 🤣🤣🤣🤣",
+                            CreatedAt = new DateTime(2024, 5, 7, 9, 49, 0, 852, DateTimeKind.Local).AddTicks(782),
+                            ParentPostId = new Guid("9348323b-890c-4eec-86f5-f0b153ca4cd3"),
+                            RootPostId = new Guid("44a9c2d8-3473-4612-ba0a-0cccb9832430")
+                        },
+                        new
+                        {
+                            PostId = new Guid("3be07143-ec74-4073-91c1-abc418f77866"),
+                            AuthorId = new Guid("22222222-2222-2222-2222-222222222222"),
+                            Content = "Použij google.",
+                            CreatedAt = new DateTime(2024, 5, 7, 9, 49, 0, 852, DateTimeKind.Local).AddTicks(822),
+                            ParentPostId = new Guid("44a9c2d8-3473-4612-ba0a-0cccb9832430"),
+                            RootPostId = new Guid("44a9c2d8-3473-4612-ba0a-0cccb9832430")
+                        },
+                        new
+                        {
+                            PostId = new Guid("b62725ad-68a7-4629-ab2f-e2cd3902389a"),
+                            AuthorId = new Guid("11111111-1111-1111-1111-111111111111"),
+                            Content = "Zkusila jsem, nepomohlo",
+                            CreatedAt = new DateTime(2024, 5, 7, 9, 49, 0, 852, DateTimeKind.Local).AddTicks(861),
+                            ParentPostId = new Guid("3be07143-ec74-4073-91c1-abc418f77866"),
+                            RootPostId = new Guid("44a9c2d8-3473-4612-ba0a-0cccb9832430")
+                        });
                 });
 
             modelBuilder.Entity("LoginProject.Models.User", b =>
@@ -108,7 +242,7 @@ namespace LoginProject.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("UserName")
-                        .HasMaxLength(256)
+                        .HasMaxLength(32)
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -127,18 +261,52 @@ namespace LoginProject.Migrations
                         {
                             Id = new Guid("11111111-1111-1111-1111-111111111111"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c3b5f9ae-e8a1-4cbe-8405-71473923ed1e",
+                            ConcurrencyStamp = "b21b4e8f-c3e0-4852-bd4a-b915deaebf3d",
                             Email = "admin@local.slhn.cz",
                             EmailConfirmed = true,
                             FullName = "Administrator User",
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCAL.SLHN.CZ",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEDRHKCrmx1nrgZ/svGu9/Nr5jqJESEEPz7zUgnj9h0Pf4PiLwmkRicsAZylGKwmoFA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJXpl+3X8Ig+rdEdNj7anTNS+MIeyzqyS6lU7IFB2tvcrgkAqj9yoaMNtSOHF9mw2g==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "Asdfiasjfisda",
                             TwoFactorEnabled = false,
                             UserName = "admin"
+                        },
+                        new
+                        {
+                            Id = new Guid("22222222-2222-2222-2222-222222222222"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "463005b3-09b3-4565-9bf4-9f057bb32be2",
+                            Email = "moderator@local.slhn.cz",
+                            EmailConfirmed = true,
+                            FullName = "Moderator User",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "moderator@LOCAL.SLHN.CZ",
+                            NormalizedUserName = "MODERATOR",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHjqibWGPdMSlURbGEwG+rBP9DCHyhQTG27Gp7BqdeOS0dCU205vClLclirAGX6IKw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "ioosdgodof",
+                            TwoFactorEnabled = false,
+                            UserName = "moderator"
+                        },
+                        new
+                        {
+                            Id = new Guid("7cb67635-0e88-447c-9997-3bec8323b902"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "fc279626-a718-46da-8b46-c5bf5bf5c8be",
+                            Email = "user@local.slhn.cz",
+                            EmailConfirmed = true,
+                            FullName = "Basic User",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "USER@LOCAL.SLHN.CZ",
+                            NormalizedUserName = "USER",
+                            PasswordHash = "AQAAAAIAAYagAAAAEIFoZkFB8FauwroCcqu1u6pRBhM6qLrmRBQZ9hyIQUBxU7rdNvi5vpj5WXljLOoDQQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "kjsdgjdgsg",
+                            TwoFactorEnabled = false,
+                            UserName = "user"
                         });
                 });
 
@@ -177,7 +345,7 @@ namespace LoginProject.Migrations
                         },
                         new
                         {
-                            Id = new Guid("98cbe636-2487-4a92-9a0c-58cff2153a3d"),
+                            Id = new Guid("22222222-2222-2222-2222-222222222222"),
                             Name = "moderator",
                             NormalizedName = "MODERATOR"
                         });
@@ -269,6 +437,11 @@ namespace LoginProject.Migrations
                         {
                             UserId = new Guid("11111111-1111-1111-1111-111111111111"),
                             RoleId = new Guid("11111111-1111-1111-1111-111111111111")
+                        },
+                        new
+                        {
+                            UserId = new Guid("22222222-2222-2222-2222-222222222222"),
+                            RoleId = new Guid("22222222-2222-2222-2222-222222222222")
                         });
                 });
 
